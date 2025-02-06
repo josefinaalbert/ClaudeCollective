@@ -635,28 +635,44 @@ footer {
     min-width: 0; /* Prevents content from overflowing */
 }
 
-.prompt-card.expanded .prompt-media {
-    .prompt-card.expanded .prompt-media {
-        width: 400px;
-        margin: 0;
-        position: sticky;
-        top: 6rem;
-        align-self: flex-start;
-        height: fit-content;
-        border-radius: var(--border-radius);
-        overflow: hidden; /* Ensure content stays within border radius */
-    }
+.prompt-media-top {
+    width: 100%;
+    margin: 0 0 2rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    display: flex;
+    justify-content: center; /* Center the image horizontally */
+}
+
+.prompt-media-top .prompt-image {
+    max-width: 100%; /* Ensure image doesn't overflow container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: var(--border-radius);
+}
+
+/* Side video styles */
+.prompt-card.expanded .prompt-media-side {
+    width: 400px;
+    margin: 0;
+    position: sticky;
+    top: 6rem;
+    align-self: flex-start;
+    height: fit-content;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
 
 .prompt-card.expanded .prompt-video {
     width: 100%;
-    height: 710px; /* Adjusted for 9:16 aspect ratio (common for vertical videos) */
+    height: 710px;
     object-fit: cover;
     border-radius: var(--border-radius);
     background: #f8f8f8;
 }
 
 /* Hide media in collapsed state */
-.prompt-card:not(.expanded) .prompt-media {
+.prompt-card:not(.expanded) .prompt-media-top,
+.prompt-card:not(.expanded) .prompt-media-side {
     display: none;
 }
 
@@ -666,13 +682,24 @@ footer {
         flex-direction: column;
     }
     
-    .prompt-card.expanded .prompt-media {
-        width: 400px; /* Maintain width on mobile */
+    .prompt-card.expanded .prompt-media-side {
+        width: 400px;
         margin: 2rem auto;
         position: static;
     }
+}
+
+@media (max-width: 768px) {
+    .prompt-card.expanded .prompt-media-side {
+        width: 300px;
+    }
     
     .prompt-card.expanded .prompt-video {
-        height: 710px; /* Maintain height on mobile */
+        height: 530px;
+    }
+    
+    .prompt-media-top .prompt-image {
+        width: 100%; /* Full width on mobile */
+        height: auto;
     }
 }

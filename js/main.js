@@ -1,5 +1,114 @@
 // Prompt data
 const prompts = [
+    // Add these to your prompts array
+    {
+    id: 'gift-guide',
+    category: 'lifestyle',
+    title: 'Trendy Gift Curator',
+    shortDescription: 'Generate personalized gift ideas that blend current trends with unique character',
+    content: `Help me find the perfect gift with these parameters:
+
+Gift Recipient Details:
+- Relationship: [friend/family/colleague]
+- Age range: [specify]
+- Primary interests: [list main hobbies/passions]
+- Style vibe: [e.g., minimalist, maximalist, indie]
+- Current obsessions: [trends/shows/music they're into]
+
+Gift Parameters:
+- Budget range: [amount]
+- Gift occasion: [birthday/holiday/etc.]
+- Preferred retailers: [if any]
+- Gift type preference: [experience/physical item/both]
+- Need by date: [timeline]
+
+Additional Context:
+- Recent purchases they loved: [examples]
+- Things they've mentioned wanting: [any hints]
+- Their social media aesthetic: [if relevant]
+- Gift history: [previous successful gifts]`,
+    examples: [
+        'Example: "Need a gift for my best friend (23F). Her favorite brands are Rhode, Alo, and Skims. She\'s into health, wellness and working out but also loves to go out. Budget $50-100.',
+        'Response includes: Curated gift ideas with links, trending items in their interest areas, and unique alternatives to common gifts'
+    ],
+    tips: [
+        'Include any gift restrictions (e.g., already own)',
+    ],
+    mediaExample: 'assets/images/GIftguide.png',
+    tags: ['shopping', 'personalization', 'trends', 'lifestyle'],
+},
+    {
+    id: 'music-discovery',
+    category: 'entertainment',
+    title: 'Music Taste Expander',
+    shortDescription: 'Discover new music perfectly aligned with your current playlist vibe',
+    content: `Analyze my music taste and recommend new tracks:
+
+Current Playlist:
+[Paste your playlist here]
+
+Analysis Preferences:
+- Preferred genres: [list any specific interests]
+- Era preference: [any specific decades/periods]
+- Language preferences: [specify if any]
+- Artist type: [mainstream/underground/both]
+- Mood categories: [e.g., upbeat, melancholic]
+
+Discovery Parameters:
+- Number of recommendations: [amount]
+- Similarity level: [1-5, where 5 is most similar]
+- Include remix/covers: [yes/no]
+- Include instrumental versions: [yes/no]`,
+    examples: [
+        'Example Input: Playlist of indie rock and dream pop songs, requesting 10 recommendations, similarity level 4, open to all eras, preference for female vocalists',
+        'Output: Personalized recommendations with artist background, key tracks to start with, and similar artists in their discography'
+    ],
+    tips: [
+        'Include both loved and disliked songs for better accuracy',
+        'Specify any musical elements you particularly enjoy',
+        'Note if you prefer lyrics-focused or production-focused music',
+        'Mention any artists you\'re specifically trying to avoid'
+    ],
+    mediaExample: 'assets/videos/music-discovery.mp4',
+    tags: ['music', 'recommendations', 'discovery', 'entertainment'],
+},
+    {
+    id: 'song-creator',
+    category: 'creative',
+    title: 'AI Song Studio',
+    shortDescription: 'Create custom songs from lyrics to melody with AI assistance',
+    content: `Let's create a song together:
+
+Song Parameters:
+- Style/Genre: [pop/rock/indie/etc.]
+- Theme/Topic: [what's the song about]
+- Mood: [emotional tone]
+- Length: [verses/chorus structure]
+- Key influences: [artists/songs for reference]
+
+Specific Elements:
+- Lyrical focus: [story/emotion/abstract]
+- Rhyme scheme: [preferences]
+- Tempo: [slow/medium/fast]
+- Key musical elements: [instruments/sounds]
+
+Production Goals:
+- Voice type: [male/female/unspecified]
+- Production style: [minimal/full band/electronic]
+- Special effects: [any specific sounds]`,
+    examples: [
+        'Example: "Create a pop song about summer nostalgia, upbeat tempo, inspired by Taylor Swift and Lorde, with a focus on vivid imagery and a catchy chorus"',
+        'Response includes: Step-by-step guidance from lyric writing to Suno AI implementation'
+    ],
+    tips: [
+        'Start with a clear emotional direction',
+        'Consider writing lyrics in sections',
+        'Test different musical styles in Suno',
+        'Iterate on the lyrics based on the melody'
+    ],
+    mediaExample: 'assets/videos/songwriting-flow.mp4',
+    tags: ['music', 'creative', 'songwriting', 'AI tools'],
+},
     {
         id: 'morning-routine',
         category: 'wellness',
@@ -322,6 +431,11 @@ function initializePromptLibrary() {
 }
 
 function createPromptCard(prompt) {
+    // Helper function to check if media is a video
+    const isVideo = (mediaPath) => mediaPath.endsWith('.mp4');
+    const isInVideoFolder = (mediaPath) => mediaPath.includes('/videos/');
+    const shouldBeOnSide = (mediaPath) => isVideo(mediaPath) && isInVideoFolder(mediaPath);
+
     return `
         <div class="prompt-card" data-id="${prompt.id}">
             <div class="prompt-card-header">
@@ -337,6 +451,12 @@ function createPromptCard(prompt) {
             <div class="prompt-card-expandable">
                 <div class="prompt-card-content">
                     <div class="prompt-content-main">
+                        ${prompt.mediaExample && !shouldBeOnSide(prompt.mediaExample) ? `
+                        <div class="prompt-media-top">
+                            <img src="${prompt.mediaExample}" alt="Example for ${prompt.title}" class="prompt-image">
+                        </div>
+                        ` : ''}
+                        
                         <div class="prompt-section">
                             <h4>Prompt Template</h4>
                             <p class="prompt-template">${prompt.content}</p>
@@ -361,15 +481,12 @@ function createPromptCard(prompt) {
                         ` : ''}
                     </div>
                     
-                    ${prompt.mediaExample ? `
-                    <div class="prompt-media">
-                        ${prompt.mediaExample.endsWith('.mp4') ? `
-                            <video controls loop class="prompt-video">
-                                <source src="${prompt.mediaExample}" type="video/mp4">
-                            </video>
-                        ` : `
-                            <img src="${prompt.mediaExample}" alt="Example for ${prompt.title}" class="prompt-image">
-                        `}
+                    ${prompt.mediaExample && shouldBeOnSide(prompt.mediaExample) ? `
+                    <div class="prompt-media-side">
+                        <video controls autoplay muted loop playsinline class="prompt-video">
+                            <source src="${prompt.mediaExample}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                     ` : ''}
                 </div>
