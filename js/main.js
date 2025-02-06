@@ -556,10 +556,33 @@ function handleCardExpansion(e) {
     // Update aria-expanded state
     expandBtn.setAttribute('aria-expanded', isExpanded);
     
-    // Smooth height transition
     if (isExpanded) {
-        expandableContent.style.height = expandableContent.scrollHeight + 'px';
+        // Disable body scroll when card is expanded
+        document.body.style.overflow = 'hidden';
+        expandableContent.style.height = 'auto';
+        
+        // Add close on escape key
+        document.addEventListener('keydown', function closeOnEscape(e) {
+            if (e.key === 'Escape') {
+                card.classList.remove('expanded');
+                document.body.style.overflow = '';
+                expandableContent.style.height = '0';
+                document.removeEventListener('keydown', closeOnEscape);
+            }
+        });
+        
+        // Add close on outside click
+        document.addEventListener('click', function closeOnOutsideClick(e) {
+            if (card.classList.contains('expanded') && !card.contains(e.target)) {
+                card.classList.remove('expanded');
+                document.body.style.overflow = '';
+                expandableContent.style.height = '0';
+                document.removeEventListener('click', closeOnOutsideClick);
+            }
+        });
     } else {
+        // Re-enable body scroll when card is collapsed
+        document.body.style.overflow = '';
         expandableContent.style.height = '0';
     }
 }
