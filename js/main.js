@@ -4,7 +4,7 @@ const prompts = [
         id: 'morning-routine',
         category: 'wellness',
         title: 'Morning Routine Engineering',
-        shortDescription: 'Create a science-backed morning routine tailored to your goals and natural rhythms',
+        shortDescription: 'Make your own tailored and science-backed morning routine',
         content: `I want to optimize my morning routine with these parameters:
 - Wake up time: [desired time]
 - Must leave for work/school by: [time]
@@ -32,22 +32,19 @@ const prompts = [
         title: 'Smart Grocery Planning',
         shortDescription: 'Generate personalized shopping lists that align with your health goals and budget',
         content: `Help me create a smart grocery list with these parameters:
-Budget: [weekly/monthly amount]
-Dietary Requirements: [any restrictions/preferences]
-Health Goals: [e.g., protein intake, reduce sugar]
-Cooking Skill Level: [beginner/intermediate/advanced]
-Meal Prep Time Available: [hours per week]
-Storage Space: [fridge/freezer capacity]
-Shopping Frequency: [how often you can shop]
-Number of People: [household size]
-Regional Location: [for seasonal produce consideration]`,
+- Budget: [weekly/monthly amount]
+- Dietary Requirements: [any restrictions/preferences]
+- Health Goals: [e.g., protein intake, reduce sugar]
+- Cooking Skill Level: [beginner/intermediate/advanced]
+- Meal Prep Time Available: [hours per week]
+- Regional Location: [for seasonal produce consideration]`,
         examples: [
             'Example: "$100/week, pescatarian, high-protein focus, intermediate cooking skills, 3 hours for meal prep, normal fridge, weekly shopping, cooking for 2, Pacific Northwest"',
             'Response includes: Categorized shopping list, meal planning suggestions, cost-effective protein sources, seasonal produce recommendations'
         ],
         tips: [
             'Specify any ingredients you particularly enjoy or dislike',
-            'Mention if you need quick-prep options for busy days',
+            'Mention your favorite brands or stores, like Trader Joes Products',
             'Include any kitchen equipment limitations',
             'Note if you need leftover-friendly meals'
         ],
@@ -59,21 +56,13 @@ Regional Location: [for seasonal produce consideration]`,
         category: 'education',
         title: 'Essay-to-Slides Converter',
         shortDescription: 'Transform written content into engaging presentation slides with optimal visual hierarchy',
-        content: `Convert this essay/text into a presentation:
+        content: `Convert this essay into a visually engaging presentation using React within 'Artifacts'. First read the essay, dissect it into parts, and then creates slides on the most important pieces of information.:
 
 [Paste your essay/text here]
-
-Presentation Parameters:
-- Number of slides: [preferred range]
-- Style: [professional/casual/academic]
-- Color scheme: [if any preference]
-- Must include sections for: [key points to highlight]
-- Visual elements needed: [charts/images/diagrams]
-- Time limit for presentation: [duration]
-- Audience: [type and background]`,
+`,
         examples: [
             'Input: 2000-word research paper on climate change impacts',
-            'Output: 12-15 slides including executive summary, key findings, data visualizations, and call to action'
+            'Output: 8-10 slides including executive summary, key findings, data visualizations, and call to action'
         ],
         tips: [
             'Provide any specific branding guidelines',
@@ -87,8 +76,8 @@ Presentation Parameters:
     {
         id: 'sorority-planning',
         category: 'college',
-        title: 'Sorority Event Management Suite',
-        shortDescription: 'Comprehensive templates for organizing and managing sorority events and operations',
+        title: 'Sorority Girl Handbook',
+        shortDescription: 'Templates for organizing your upcoming sorority events and chapter operations',
         content: `Generate a [event type] planning template for:
 Chapter: [name/size]
 Event Type: [rush/philanthropy/formal]
@@ -144,14 +133,14 @@ Optional elements to include:
             'Mix high-brow and low-brow references',
             'Add unexpected twists to keep it engaging'
         ],
-        mediaExample: 'assets/images/definition-tree-example.jpg',
+        mediaExample: 'assets/videos/College.mp4',
         tags: ['humor', 'social media', 'content creation', 'viral']
     },
     {
         id: 'trend-forecast',
         category: 'fashion',
-        title: 'Personal Style Curator & Trend Navigator',
-        shortDescription: 'Get personalized shopping recommendations based on style preferences and trend analysis',
+        title: 'Personal Shopper',
+        shortDescription: 'Find your next purchase with personalized shopping recommendations from your own style and trend analysis',
         content: `Create a personalized shopping guide with these parameters:
 
 Style Profile:
@@ -159,13 +148,11 @@ Style Profile:
 - Price range: [budget breakdown]
 - Key pieces needed: [list items]
 - Occasion(s): [where you'll wear it]
-- Current trends to incorporate: [specific trends]
+- Current trends to incorporate: [polka dots, sequin tops, knit skirts]
 - No-go styles/elements: [what to avoid]
 
 Additional Considerations:
 - Local weather/season: [location & season]
-- Existing wardrobe colors: [main colors]
-- Body type considerations: [any specific needs]
 - Sustainability preferences: [if any]`,
         examples: [
             'Example: "Looking for spring transition pieces that blend dark academia with Y2K, budget $200-500 per piece, need versatile items for both office and weekend"',
@@ -177,14 +164,14 @@ Additional Considerations:
             'Specify if you need size-inclusive options',
             'Note any dress code requirements'
         ],
-        mediaExample: 'assets/videos/style-guide.mp4',
+        mediaExample: '.assets/videos/style-guide.mp4',
         tags: ['fashion', 'shopping', 'personal style', 'trends']
     }, 
     {
         id: 'creator-analytics',
         category: 'content',
-        title: 'Content Creator Analytics Optimizer',
-        shortDescription: 'Transform your engagement data into actionable content strategies',
+        title: 'Influencer Accelerator',
+        shortDescription: 'Use your social media engagement data to help improve your content and grow your following',
         content: `Analyze my content performance and create a strategy:
 
 Platform Data:
@@ -217,26 +204,26 @@ Goals:
         id: 'low-cal-drinks',
         category: 'wellness',
         title: 'Smart Sipping Guide',
-        shortDescription: 'Discover delicious low-calorie drink options for both coffee shops and bars',
-        content: `Create a customized drink guide:
+        shortDescription: 'Low-calorie drink options for your next coffee or bar order',
+        content: `Create a customized drink for me:
 
 Preferences:
-- Type: [coffee/alcohol/both]
+- Type: [coffee/alcohol/tea]
 - Calorie limit: [max calories]
 - Sweetness level: [1-5]
 - Flavor profile: [preferred tastes]
 - Must include: [specific ingredients]
 - Must avoid: [restrictions]
 
-For Coffee Drinks:
-- Preferred coffee base: [espresso/cold brew/etc]
-- Milk alternatives: [if any]
-- Temperature: [hot/iced/both]
+    For Coffee Drinks:
+    - Preferred coffee base: [espresso/cold brew/etc]
+    - Milk alternatives: [if any]
+    - Temperature: [hot/iced/both]
 
-For Cocktails:
-- Preferred spirits: [list]
-- Mixer preferences: [list]
-- Style: [fruity/dry/herb-forward]`,
+    For Cocktails:
+    - Preferred spirits: [list]
+    - Mixer preferences: [list]
+    - Style: [fruity/dry/herb-forward]`,
         examples: [
             'Coffee Example: "Iced drink under 100 calories, very sweet taste, vanilla notes, no artificial sweeteners"',
             'Cocktail Example: "Tequila-based, under 120 calories, citrus-forward, no sweet mixers"'
@@ -348,40 +335,44 @@ function createPromptCard(prompt) {
             <p class="prompt-short-description">${prompt.shortDescription}</p>
             
             <div class="prompt-card-expandable">
-                ${prompt.mediaExample ? `
-                <div class="prompt-media">
-                    ${prompt.mediaExample.endsWith('.mp4') ? `
-                        <video controls class="prompt-video">
-                            <source src="${prompt.mediaExample}" type="video/mp4">
-                        </video>
-                    ` : `
-                        <img src="${prompt.mediaExample}" alt="Example for ${prompt.title}" class="prompt-image">
-                    `}
+                <div class="prompt-card-content">
+                    <div class="prompt-content-main">
+                        <div class="prompt-section">
+                            <h4>Prompt Template</h4>
+                            <p class="prompt-template">${prompt.content}</p>
+                        </div>
+                        
+                        ${prompt.examples ? `
+                        <div class="prompt-section">
+                            <h4>Examples</h4>
+                            <ul class="prompt-examples">
+                                ${prompt.examples.map(example => `<li>${example}</li>`).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+                        
+                        ${prompt.tips ? `
+                        <div class="prompt-section">
+                            <h4>Tips</h4>
+                            <ul class="prompt-tips">
+                                ${prompt.tips.map(tip => `<li>${tip}</li>`).join('')}
+                            </ul>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${prompt.mediaExample ? `
+                    <div class="prompt-media">
+                        ${prompt.mediaExample.endsWith('.mp4') ? `
+                            <video controls loop class="prompt-video">
+                                <source src="${prompt.mediaExample}" type="video/mp4">
+                            </video>
+                        ` : `
+                            <img src="${prompt.mediaExample}" alt="Example for ${prompt.title}" class="prompt-image">
+                        `}
+                    </div>
+                    ` : ''}
                 </div>
-                ` : ''}
-                
-                <div class="prompt-section">
-                    <h4>Prompt Template</h4>
-                    <p class="prompt-template">${prompt.content}</p>
-                </div>
-                
-                ${prompt.examples ? `
-                <div class="prompt-section">
-                    <h4>Examples</h4>
-                    <ul class="prompt-examples">
-                        ${prompt.examples.map(example => `<li>${example}</li>`).join('')}
-                    </ul>
-                </div>
-                ` : ''}
-                
-                ${prompt.tips ? `
-                <div class="prompt-section">
-                    <h4>Tips</h4>
-                    <ul class="prompt-tips">
-                        ${prompt.tips.map(tip => `<li>${tip}</li>`).join('')}
-                    </ul>
-                </div>
-                ` : ''}
             </div>
             
             <div class="prompt-tags">
