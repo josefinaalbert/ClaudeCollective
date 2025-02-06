@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Collective</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <div class="page-wrapper">
+    <nav class="main-nav">
+        <div class="nav-content">
+            <div class="logo">Claude Collective</div>
+            <ul class="nav-links">
+                <li><a href="#prompts">Prompt Library</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="https://tiktok.com/@username" target="_blank">TikTok</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Claude Collective</h1>
+            <p>A community-driven platform showcasing creative ways to enhance daily life with AI</p>
+        </div>
+        
+        <div class="videos-row">
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/SlidesVideo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="video-container">
+                <video autoplay loop muted playsinline>
+                    <source src="assets/videos/VdayVideo.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="prompts" class="prompt-library">
+            <h2>Prompt Library</h2>
+            <div id="prompt-library-root"></div>
+        </section>
+
+        <section id="community" class="community-section">
+            <h2>Join Our Community</h2>
+            <div class="community-grid">
+                <div class="community-card">
+                    <h3>Share Your Ideas</h3>
+                    <p>Have a creative prompt to share? Submit it to our library!</p>
+                    <button class="submit-btn" onclick="openSubmissionForm()">Submit a Prompt</button>
+                </div>
+            </div>  
+        </section>
+    </main>
+</div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#prompts">Prompt Library</a></li>
+                    <li><a href="#community">Community</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://tiktok.com/@username">TikTok</a></li>
+                    <li><a href="mailto:contact@claudecollective.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Claude Collective. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Modal for prompt submission -->
+    <div id="submission-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Submit Your Prompt</h2>
+            <form id="prompt-submission-form">
+                <div class="form-group">
+                    <label for="prompt-category">Category</label>
+                    <select id="prompt-category" required>
+                        <option value="">Select a category</option>
+                        <option value="wellness">Health & Wellness</option>
+                        <option value="entertainment">Entertainment & Games</option>
+                        <option value="fashion">Fashion & Style</option>
+                        <option value="location">Location-based</option>
+                        <option value="college">College Life</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-title">Title</label>
+                    <input type="text" id="prompt-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-content">Prompt</label>
+                    <textarea id="prompt-content" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="js/main.js"></script>
+</div>
+</body>
+</html>
