@@ -402,8 +402,11 @@ function initializePromptLibrary() {
             <button class="category-btn" data-category="wellness">Wellness</button>
             <button class="category-btn" data-category="entertainment">Entertainment</button>
             <button class="category-btn" data-category="fashion">Fashion</button>
-            <button class="category-btn" data-category="college">College</button>
-        </div>
+            <button class="category-btn" data-category="college">College</button> <button class="category-btn" data-category="lifestyle">Lifestyle</button>
+        <button class="category-btn" data-category="creative">Creative</button>
+        <button class="category-btn" data-category="content">Content</button>
+        <button class="category-btn" data-category="professional">Professional</button>
+    </div>
     `;
 
     // Create prompts grid
