@@ -86,14 +86,12 @@ Discovery Parameters:
 - Essential tasks that must be included: [list tasks]
 - Available time for morning routine: [duration]`,
         examples: [
-            'Example: "I need to wake up at 6:30 AM, leave by 8:30 AM, my energy peaks mid-morning, goals are exercise and breakfast, currently struggling with hitting snooze, must include shower and coffee, have 2 hours total."',
-            'Response will include: Optimal wake-up strategy, task sequencing based on energy levels, nutrition timing, and habit-stacking recommendations.'
+            'Example: "I\'m looking to create an optimized morning routine between 6:30am-8am. Could you design a science-backed schedule with specific time blocks and explain the research behind each recommendation? Please make it visually organized with timestamps and key benefits of each activity."',
         ],
         tips: [
-            'Include your natural sleep patterns and energy rhythms',
             'Mention any existing habits you want to maintain',
-            'Specify if you need quiet activities (roommates/family sleeping)',
-            'Note any dietary restrictions for breakfast planning'
+            'Use artifacts to create a visual representation or timeline of your morning',
+            'Specify if you need quiet activities (roommates/family sleeping)'
         ],
         mediaExample: 'assets/images/definition-tree-example.jpg',
         tags: ['productivity', 'wellness', 'habits', 'morning'],
@@ -150,30 +148,21 @@ Discovery Parameters:
         category: 'college',
         title: 'Sorority Girl Handbook',
         shortDescription: 'Templates for organizing your upcoming sorority events and chapter operations',
-        content: `Generate a [event type] planning template for:
-Chapter: [name/size]
-Event Type: [rush/philanthropy/formal]
-Budget: [amount]
-Timeline: [dates/duration]
-Expected Attendance: [number]
-Location Type: [venue requirements]
-Special Requirements: [traditions/rules/considerations]
+        content: `As the Marketing and Design Chair for my sorority, I'm seeking creative direction for our upcoming Bid Day themed '[INSERT THEME].Please help develop a comprehensive visual concept that feels elevated and timeless while maintaining a fresh, contemporary edge. Looking to create an immersive experience that:
+- Delivers a sophisticated take on the [INSERT THEME] theme without feeling cliché
+- Incorporates current aesthetic trends while remaining timeless
+- Creates memorable moments for [NUMBER] new members through thoughtfully curated decor, signage, and gifts
+- Integrates [INSERT RELEVANT BRANDS/STYLES/AESTHETICS] into the overall concept
 
 Additional Needs:
-- Tracking system for: [members/budgets/tasks]
-- Required documentation: [forms/reports]
-- Communication plan: [announcements/updates]`,
+- Budget per member: [INSERT IF APPLICABLE]
+- Location/Venue details: [INSERT]
+- Style references/inspiration: [INSERT]`,
         examples: [
-            'Rush Week Template: "150-member chapter, 7-day rush, 200 PNMs, 4 rounds, $5000 budget, need tracking for attendance and voting"',
+            'Bid Day : "As Marketing and Design Chair, I need creative direction for our sorority Bid Day (themed is Golden Hour). Looking to craft a refined experience balancing contemporary trends with timeless appeal. The vision should include visual concepts for decor and marketing materials, gift curation for new members incorporating trending brands, and specific recommendations for photo moments and branded touchpoints."',
             'Philanthropy Event: "Annual 5K fundraiser, 300 participants, $3000 budget, needs sponsor tracking and volunteer management"'
         ],
-        tips: [
-            'Include any national organization requirements',
-            'Specify any past event data to reference',
-            'Note any collaboration with other organizations',
-            'Mention any specific risk management needs'
-        ],
-        mediaExample: 'assets/images/definition-tree-example.jpg',
+        mediaExample: 'assets/videos/bid.mp4',
         tags: ['greek life', 'event planning', 'organization', 'college']
     },
     {
