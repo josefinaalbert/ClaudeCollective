@@ -93,7 +93,7 @@ Discovery Parameters:
             'Use artifacts to create a visual representation or timeline of your morning',
             'Specify if you need quiet activities (roommates/family sleeping)'
         ],
-        mediaExample: 'assets/images/definition-tree-example.jpg',
+        mediaExample: 'assets/videos/morning.mp4',
         tags: ['productivity', 'wellness', 'habits', 'morning'],
     },
     {

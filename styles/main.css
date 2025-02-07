@@ -569,29 +569,6 @@ footer {
     width: 100% !important;
 }
 
-/* Media in prompt cards */
-.prompt-media {
-    margin: 1rem 0;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-}
-
-.prompt-image {
-    width: 50%;
-    max-height: 180px;
-    border-radius: var(--border-radius);
-}
-
-.prompt-video {
-    width: 100%;
-    max-height: 300px;
-    border-radius: var(--border-radius);
-}
-
-.expanded .prompt-media {
-    max-width: 800px;
-    margin: 1rem auto;
-}
 
 /* Feature Grid */
 /* Feature grid styles */
@@ -619,39 +596,85 @@ footer {
     line-height: 1.6;
 }
 
-/* PROMPT CARD VIDEO*/
+/* PROMPT CARD */
 
 /* Expanded card layout */
 .prompt-card.expanded .prompt-card-content {
     display: flex;
     gap: 2rem;
-    max-width: 600px;
+    max-width: 1200px;
     margin: 0 auto;
+    padding: 1rem;
 }
 
 .prompt-card.expanded .prompt-content-main {
     flex: 1;
-    min-width: 0; /* Prevents content from overflowing */
+    min-width: 0;
+}
+
+/* Media in prompt cards */
+.prompt-media {
+    margin: 1rem 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.prompt-image {
+    width: 50%;
+    max-height: 180px;
+    border-radius: var(--border-radius);
+}
+
+.prompt-video {
+    width: 100%;
+    height: 100%;
+    max-height: 600px;
+    object-fit: contain;
+    display: block;
+}
+
+.expanded .prompt-media {
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+.prompt-media-top,
+.prompt-media-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #f8f8f8;
+    border-radius: var(--border-radius);
 }
 
 .prompt-media-top {
-    width: 100%;
-    margin: 0 0 2rem 0;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    display: flex;
-    justify-content: center; /* Center the image horizontally */
+    max-height: 500px;
+    margin: 1rem 0;
 }
 
 .prompt-media-top .prompt-image {
-    max-width: 90%; /* Ensure image doesn't overflow container */
-    height: 600px; /* Maintain aspect ratio */
-    border-radius: var(--border-radius);
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
 }
 
+.prompt-media-side {
+    height: auto;
+    max-height: 600px;
+    width: 300px;
+    position: sticky;
+    top: 2rem;
+}
 /* Side video styles */
 .prompt-card.expanded .prompt-media-side {
-    width: 150px;
+    width: 300px;
     margin: 0;
     position: sticky;
     top: 6rem;
@@ -677,28 +700,43 @@ footer {
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
+    .prompt-card.expanded .prompt-content-main {
+        flex: 1;
+        min-width: 0;
+    }
+
     .prompt-card.expanded .prompt-card-content {
         flex-direction: column;
     }
-    
-    .prompt-card.expanded .prompt-media-side {
-        width: 400px;
-        margin: 2rem auto;
-        position: static;
+
+    .prompt-video {
+        max-height: 500px;
     }
+    
+    @media (max-width: 768px) {
+        .prompt-media-top,
+        .prompt-media-side {
+            max-height: 400px;
+        }
+        
+        .prompt-media-top .prompt-image,
+        .prompt-video {
+            max-height: 400px;
+        }
+    }
+    /* Loading states */
+.media-loading {
+    min-height: 200px;
+    background: #f8f8f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-@media (max-width: 768px) {
-    .prompt-card.expanded .prompt-media-side {
-        width: 300px;
-    }
-    
-    .prompt-card.expanded .prompt-video {
-        height: 530px;
-    }
-    
-    .prompt-media-top .prompt-image {
-        width: 100%; /* Full width on mobile */
-        height: auto;
-    }
+/* Hover effects */
+.prompt-media-top:hover .prompt-image,
+.prompt-media-side:hover .prompt-video {
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
 }
