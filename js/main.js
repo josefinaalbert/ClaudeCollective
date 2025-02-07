@@ -105,12 +105,10 @@ Discovery Parameters:
 - Budget: [weekly/monthly amount]
 - Dietary Requirements: [any restrictions/preferences]
 - Health Goals: [e.g., protein intake, reduce sugar]
-- Cooking Skill Level: [beginner/intermediate/advanced]
-- Meal Prep Time Available: [hours per week]
-- Regional Location: [for seasonal produce consideration]`,
+- Cooking Skill Level: [beginner/intermediate/advanced]`,
         examples: [
-            'Example: "$100/week, pescatarian, high-protein focus, intermediate cooking skills, 3 hours for meal prep, normal fridge, weekly shopping, cooking for 2, Pacific Northwest"',
-            'Response includes: Categorized shopping list, meal planning suggestions, cost-effective protein sources, seasonal produce recommendations'
+              'Example: "$100/week, pescatarian, high-protein focus, intermediate cooking skills, 3 hours for meal prep, normal fridge, weekly shopping, cooking for 2, Pacific Northwest"',
+                'Example: "Interactive meal planner featuring adjustable servings (1-6), protein choices (chicken/salmon/tofu), auto-scaling quantities, clear instructions, all Trader Joe\'s ingredients. Customizable via dropdown menus."',
         ],
         tips: [
             'Specify any ingredients you particularly enjoy or dislike',
@@ -118,7 +116,7 @@ Discovery Parameters:
             'Include any kitchen equipment limitations',
             'Note if you need leftover-friendly meals'
         ],
-        mediaExample: 'assets/images/definition-tree-example.jpg',
+        mediaExample: 'assets/videos/grocery.mp4',
         tags: ['meal planning', 'budget', 'nutrition', 'shopping'],
     },
     {
