@@ -40,7 +40,7 @@ Additional Context:
     {
     id: 'music-discovery',
     category: 'entertainment',
-    title: 'Music Taste Expander',
+    title: 'Music Discovery',
     shortDescription: 'Discover new music perfectly aligned with your current playlist vibe',
     content: `Analyze my music taste and recommend new tracks:
 
@@ -69,45 +69,8 @@ Discovery Parameters:
         'Note if you prefer lyrics-focused or production-focused music',
         'Mention any artists you\'re specifically trying to avoid'
     ],
-    mediaExample: 'assets/videos/music-discovery.mp4',
+    mediaExample: 'assets/images/Spotify.png',
     tags: ['music', 'recommendations', 'discovery', 'entertainment'],
-},
-    {
-    id: 'song-creator',
-    category: 'creative',
-    title: 'AI Song Studio',
-    shortDescription: 'Create custom songs from lyrics to melody with AI assistance',
-    content: `Let's create a song together:
-
-Song Parameters:
-- Style/Genre: [pop/rock/indie/etc.]
-- Theme/Topic: [what's the song about]
-- Mood: [emotional tone]
-- Length: [verses/chorus structure]
-- Key influences: [artists/songs for reference]
-
-Specific Elements:
-- Lyrical focus: [story/emotion/abstract]
-- Rhyme scheme: [preferences]
-- Tempo: [slow/medium/fast]
-- Key musical elements: [instruments/sounds]
-
-Production Goals:
-- Voice type: [male/female/unspecified]
-- Production style: [minimal/full band/electronic]
-- Special effects: [any specific sounds]`,
-    examples: [
-        'Example: "Create a pop song about summer nostalgia, upbeat tempo, inspired by Taylor Swift and Lorde, with a focus on vivid imagery and a catchy chorus"',
-        'Response includes: Step-by-step guidance from lyric writing to Suno AI implementation'
-    ],
-    tips: [
-        'Start with a clear emotional direction',
-        'Consider writing lyrics in sections',
-        'Test different musical styles in Suno',
-        'Iterate on the lyrics based on the melody'
-    ],
-    mediaExample: 'assets/videos/songwriting-flow.mp4',
-    tags: ['music', 'creative', 'songwriting', 'AI tools'],
 },
     {
         id: 'morning-routine',
@@ -179,7 +142,7 @@ Production Goals:
             'Specify if you need speaker notes',
             'Include any required citations or references format'
         ],
-        mediaExample: 'assets/images/definition-tree-example.jpg',
+        mediaExample: 'assets/videos/SlidesVideo.mp4',
         tags: ['presentations', 'education', 'content', 'design'],
     },
     {
