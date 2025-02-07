@@ -254,15 +254,79 @@ body {
     border-color: var(--secondary-color);
 }
 
-/* Prompt Cards Grid */
+/*new*/
+
+.prompt-library-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.prompt-filters-container {
+    position: sticky;
+    top: 0;
+    background: white;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    z-index: 10;
+}
+
+.prompt-search-input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+}
+
+.category-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.category-button {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.category-button:hover {
+    background: #f0f0f0;
+}
+
+.category-button.active {
+    background: var(--secondary-color);
+    color: white;
+    border-color: var(--secondary-color);
+}
+
+/*new*/
+
+.prompts-scroll-container {
+    margin-top: 1rem;
+    height: 600px;
+    overflow-y: auto;
+}
+
+/* Update your existing prompts-grid class */
 .prompts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Slightly smaller cards */
-    gap: 1.5rem; /* Reduced gap */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
     width: 100%;
-    overflow-y: auto; /* Enable vertical scrolling */
-    padding-right: 1rem; /* Space for scrollbar */
+    padding-right: 1rem;
 }
+
 
 /* Style the scrollbar */
 .prompts-grid::-webkit-scrollbar {
@@ -291,6 +355,19 @@ body {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
     font-size: 0.95rem; /* Slightly smaller text */
+}
+
+.prompt-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.prompt-description {
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
 }
 
 .prompt-card.expanded {
@@ -483,7 +560,28 @@ body {
     }
 
     .prompt-card.expanded {
-        margin: 0 1rem;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        max-width: 1200px;
+        max-height: 90vh;
+        overflow-y: auto;
+        z-index: 1000;
+        margin: 0;
+    }
+
+    /* Overlay for expanded cards */
+    .prompt-card.expanded::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
     }
 
     .category-filters {
@@ -727,5 +825,17 @@ footer {
     .prompt-media-top .prompt-image {
         width: 100%; /* Full width on mobile */
         height: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .prompt-library {
+        height: 700px; /* Smaller height on mobile */
+        padding: 2rem 1rem;
+    }
+
+    .prompts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
     }
 }
