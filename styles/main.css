@@ -211,15 +211,11 @@ body {
     padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    height: 800px; /* Fixed height for scrollable area */
-    display: flex;
-    flex-direction: column;
 }
 
 /* Prompt Library Filters */
 .prompt-filters {
     margin-bottom: 2rem;
-    flex-shrink: 0; /* Prevent filters from shrinking */
 }
 
 .prompt-search {
@@ -254,125 +250,26 @@ body {
     border-color: var(--secondary-color);
 }
 
-/*new*/
-
-.prompt-library-wrapper {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-}
-
-.prompt-filters-container {
-    position: sticky;
-    top: 0;
-    background: white;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e5e7eb;
-    z-index: 10;
-}
-
-.prompt-search-input {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-}
-
-.category-buttons {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-}
-
-.category-button {
-    padding: 0.5rem 1.5rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.category-button:hover {
-    background: #f0f0f0;
-}
-
-.category-button.active {
-    background: var(--secondary-color);
-    color: white;
-    border-color: var(--secondary-color);
-}
-
-/*new*/
-
-.prompts-scroll-container {
-    margin-top: 1rem;
-    height: 600px;
-    overflow-y: auto;
-}
-
-/* Update your existing prompts-grid class */
+/* Prompt Cards Grid */
 .prompts-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    width: 100%;
-    padding-right: 1rem;
-}
-
-
-/* Style the scrollbar */
-.prompts-grid::-webkit-scrollbar {
-    width: 8px;
-}
-
-.prompts-grid::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.prompts-grid::-webkit-scrollbar-thumb {
-    background: var(--secondary-color);
-    border-radius: 4px;
-}
-
-.prompts-grid::-webkit-scrollbar-thumb:hover {
-    background: #6ca3b2;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    width:100%
 }
 
 /* Prompt Card Styles */
 .prompt-card {
     background: white;
-    padding: 1.25rem; /* Reduced padding */
+    padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
-    font-size: 0.95rem; /* Slightly smaller text */
-}
-
-.prompt-title {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.prompt-description {
-    color: var(--text-color);
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
 }
 
 .prompt-card.expanded {
     grid-column: 1 / -1;
-    max-width: 1000px;
+    max-width: 2000px;
     margin: 0 auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
@@ -560,28 +457,7 @@ body {
     }
 
     .prompt-card.expanded {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 90%;
-        max-width: 1200px;
-        max-height: 90vh;
-        overflow-y: auto;
-        z-index: 1000;
-        margin: 0;
-    }
-
-    /* Overlay for expanded cards */
-    .prompt-card.expanded::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: -1;
+        margin: 0 1rem;
     }
 
     .category-filters {
@@ -825,17 +701,5 @@ footer {
     .prompt-media-top .prompt-image {
         width: 100%; /* Full width on mobile */
         height: auto;
-    }
-}
-
-@media (max-width: 768px) {
-    .prompt-library {
-        height: 700px; /* Smaller height on mobile */
-        padding: 2rem 1rem;
-    }
-
-    .prompts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1rem;
     }
 }
