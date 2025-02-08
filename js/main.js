@@ -1,335 +1,5 @@
-// Prompt data
-const prompts = [
-    // Add these to your prompts array
-    {
-    id: 'gift-guide',
-    category: 'lifestyle',
-    title: 'Trendy Gift Curator',
-    shortDescription: 'Generate personalized gift ideas that blend current trends with unique character',
-    content: `Help me find the perfect gift with these parameters:
-
-Gift Recipient Details:
-- Relationship: [friend/family/colleague]
-- Age range: [specify]
-- Primary interests: [list main hobbies/passions]
-- Style vibe: [e.g., minimalist, maximalist, indie]
-- Current obsessions: [trends/shows/music they're into]
-
-Gift Parameters:
-- Budget range: [amount]
-- Gift occasion: [birthday/holiday/etc.]
-- Preferred retailers: [if any]
-- Gift type preference: [experience/physical item/both]
-- Need by date: [timeline]
-
-Additional Context:
-- Recent purchases they loved: [examples]
-- Things they've mentioned wanting: [any hints]
-- Their social media aesthetic: [if relevant]
-- Gift history: [previous successful gifts]`,
-    examples: [
-        'Example: "Need a gift for my best friend (23F). Her favorite brands are Rhode, Alo, and Skims. She\'s into health, wellness and working out but also loves to go out. Budget $50-100.',
-        'Response includes: Curated gift ideas with links, trending items in their interest areas, and unique alternatives to common gifts'
-    ],
-    tips: [
-        'Include any gift restrictions (e.g., already own)',
-    ],
-    mediaExample: 'assets/images/GIftguide.png',
-    tags: ['shopping', 'personalization', 'trends', 'lifestyle'],
-},
-    {
-    id: 'music-discovery',
-    category: 'entertainment',
-    title: 'Music Discovery',
-    shortDescription: 'Discover new music perfectly aligned with your current playlist vibe',
-    content: `Analyze my music taste and recommend new tracks:
-
-Current Playlist:
-[Paste your playlist here]
-
-Analysis Preferences:
-- Preferred genres: [list any specific interests]
-- Era preference: [any specific decades/periods]
-- Language preferences: [specify if any]
-- Artist type: [mainstream/underground/both]
-- Mood categories: [e.g., upbeat, melancholic]
-
-Discovery Parameters:
-- Number of recommendations: [amount]
-- Similarity level: [1-5, where 5 is most similar]
-- Include remix/covers: [yes/no]
-- Include instrumental versions: [yes/no]`,
-    examples: [
-        'Example Input: Playlist of indie rock and dream pop songs, requesting 10 recommendations, similarity level 4, open to all eras, preference for female vocalists',
-        'Output: Personalized recommendations with artist background, key tracks to start with, and similar artists in their discography'
-    ],
-    tips: [
-        'Include both loved and disliked songs for better accuracy',
-        'Specify any musical elements you particularly enjoy',
-        'Note if you prefer lyrics-focused or production-focused music',
-        'Mention any artists you\'re specifically trying to avoid'
-    ],
-    mediaExample: 'assets/images/Spotify.png',
-    tags: ['music', 'recommendations', 'discovery', 'entertainment'],
-},
-    {
-        id: 'morning-routine',
-        category: 'wellness',
-        title: 'Morning Routine Engineering',
-        shortDescription: 'Make your own tailored and science-backed morning routine',
-        content: `I want to optimize my morning routine with these parameters:
-- Wake up time: [desired time]
-- Must leave for work/school by: [time]
-- Energy level naturally peaks at: [time of day]
-- Key morning goals: [e.g., exercise, meditation, work]
-- Current challenges: [e.g., hitting snooze, feeling rushed]
-- Essential tasks that must be included: [list tasks]
-- Available time for morning routine: [duration]`,
-        examples: [
-            'Example: "I\'m looking to create an optimized morning routine between 6:30am-8am. Could you design a science-backed schedule with specific time blocks and explain the research behind each recommendation? Please make it visually organized with timestamps and key benefits of each activity."',
-        ],
-        tips: [
-            'Mention any existing habits you want to maintain',
-            'Use artifacts to create a visual representation or timeline of your morning',
-            'Specify if you need quiet activities (roommates/family sleeping)'
-        ],
-        mediaExample: 'assets/videos/morning.mp4',
-        tags: ['productivity', 'wellness', 'habits', 'morning'],
-    },
-    {
-        id: 'smart-grocery',
-        category: 'wellness',
-        title: 'Smart Grocery Planning',
-        shortDescription: 'Generate personalized shopping lists that align with your health goals and budget',
-        content: `Help me create a smart grocery list with these parameters:
-- Budget: [weekly/monthly amount]
-- Dietary Requirements: [any restrictions/preferences]
-- Health Goals: [e.g., protein intake, reduce sugar]
-- Cooking Skill Level: [beginner/intermediate/advanced]`,
-        examples: [
-              'Example: "$100/week, pescatarian, high-protein focus, intermediate cooking skills, 3 hours for meal prep, normal fridge, weekly shopping, cooking for 2, Pacific Northwest"',
-                'Example: "Interactive meal planner featuring adjustable servings (1-6), protein choices (chicken/salmon/tofu), auto-scaling quantities, clear instructions, all Trader Joe\'s ingredients. Customizable via dropdown menus."',
-        ],
-        tips: [
-            'Specify any ingredients you particularly enjoy or dislike',
-            'Mention your favorite brands or stores, like Trader Joes Products',
-            'Include any kitchen equipment limitations',
-            'Note if you need leftover-friendly meals'
-        ],
-        mediaExample: 'assets/videos/grocery.mp4',
-        tags: ['meal planning', 'budget', 'nutrition', 'shopping'],
-    },
-    {
-        id: 'presentation-builder',
-        category: 'education',
-        title: 'Essay-to-Slides Converter',
-        shortDescription: 'Transform written content into engaging presentation slides with optimal visual hierarchy',
-        content: `Convert this essay into a visually engaging presentation using React within 'Artifacts'. First read the essay, dissect it into parts, and then creates slides on the most important pieces of information.:
-
-[Paste your essay/text here]
-`,
-        examples: [
-            'Input: 2000-word research paper on climate change impacts',
-            'Output: 8-10 slides including executive summary, key findings, data visualizations, and call to action'
-        ],
-        tips: [
-            'Provide any specific branding guidelines',
-            'Mention if certain content must be emphasized',
-            'Specify if you need speaker notes',
-            'Include any required citations or references format'
-        ],
-        mediaExample: 'assets/videos/SlidesVideo.mp4',
-        tags: ['presentations', 'education', 'content', 'design'],
-    },
-    {
-        id: 'sorority-planning',
-        category: 'college',
-        title: 'Sorority Girl Handbook',
-        shortDescription: 'Templates for organizing your upcoming sorority events and chapter operations',
-        content: `As the Marketing and Design Chair for my sorority, I'm seeking creative direction for our upcoming Bid Day themed '[INSERT THEME].Please help develop a comprehensive visual concept that feels elevated and timeless while maintaining a fresh, contemporary edge. Looking to create an immersive experience that:
-- Delivers a sophisticated take on the [INSERT THEME] theme without feeling cliché
-- Incorporates current aesthetic trends while remaining timeless
-- Creates memorable moments for [NUMBER] new members through thoughtfully curated decor, signage, and gifts
-- Integrates [INSERT RELEVANT BRANDS/STYLES/AESTHETICS] into the overall concept
-
-Additional Needs:
-- Budget per member: [INSERT IF APPLICABLE]
-- Location/Venue details: [INSERT]
-- Style references/inspiration: [INSERT]`,
-        examples: [
-            'Bid Day : "As Marketing and Design Chair, I need creative direction for our sorority Bid Day (themed is Golden Hour). Looking to craft a refined experience balancing contemporary trends with timeless appeal. The vision should include visual concepts for decor and marketing materials, gift curation for new members incorporating trending brands, and specific recommendations for photo moments and branded touchpoints."',
-            'Philanthropy Event: "Annual 5K fundraiser, 300 participants, $3000 budget, needs sponsor tracking and volunteer management"'
-        ],
-        mediaExample: 'assets/videos/bid.mp4',
-        tags: ['greek life', 'event planning', 'organization', 'college']
-    },
-    {
-        id: 'urban-dictionary',
-        category: 'entertainment',
-        title: 'Gen Z Definition Tree Generator',
-        shortDescription: 'Create viral-worthy urban dictionary entries with layered meanings and cultural references',
-        content: `Help me create a Gen Z definition tree for the word/concept: [word/concept]
-
-Style Parameters:
-- Core vibe: [chaotic/intellectual/both]
-- Cultural references to include: [list any specific themes]
-- Target audience: [e.g., TikTok, Twitter, Instagram]
-- Complexity level: [1-5, where 5 is most complex]
-- Tone: [e.g., satirical, deadpan, academic]
-
-Optional elements to include:
-- Related slang terms
-- Example usage scenarios
-- Etymology (real or imagined)
-- Cultural impact analysis`,
-        examples: [
-            'Example Input: "Create a definition tree for \'touch grass\' with complexity level 5, academic tone, targeting Twitter, including references to wellness culture and tech burnout"',
-            'Response includes: Multi-layered definition starting from literal meaning, evolving through ironic usage, to meta-commentary on digital culture'
-        ],
-        tips: [
-            'Include current events or trending topics for relevance',
-            'Layer meanings from literal to increasingly abstract',
-            'Mix high-brow and low-brow references',
-            'Add unexpected twists to keep it engaging'
-        ],
-        mediaExample: 'assets/videos/College.mp4',
-        tags: ['humor', 'social media', 'content creation', 'viral']
-    },
-    {
-        id: 'trend-forecast',
-        category: 'fashion',
-        title: 'Personal Shopper',
-        shortDescription: 'Find your next purchase with personalized shopping recommendations from your own style and trend analysis',
-        content: `Create a personalized shopping guide with these parameters:
-
-Style Profile:
-- Core aesthetic: [e.g., coastal grandmother, dark academia]
-- Price range: [budget breakdown]
-- Key pieces needed: [list items]
-- Occasion(s): [where you'll wear it]
-- Current trends to incorporate: [polka dots, sequin tops, knit skirts]
-- No-go styles/elements: [what to avoid]
-
-Additional Considerations:
-- Local weather/season: [location & season]
-- Sustainability preferences: [if any]`,
-        examples: [
-            'Example: "Looking for spring transition pieces that blend dark academia with Y2K, budget $200-500 per piece, need versatile items for both office and weekend"',
-            'Response includes: Curated item suggestions with styling combinations and where to find them'
-        ],
-        tips: [
-            'Include specific measurements if relevant',
-            'Mention any brand preferences or aversions',
-            'Specify if you need size-inclusive options',
-            'Note any dress code requirements'
-        ],
-        mediaExample: '.assets/videos/style-guide.mp4',
-        tags: ['fashion', 'shopping', 'personal style', 'trends']
-    }, 
-    {
-        id: 'creator-analytics',
-        category: 'content',
-        title: 'Influencer Accelerator',
-        shortDescription: 'Use your social media engagement data to help improve your content and grow your following',
-        content: `Analyze my content performance and create a strategy:
-
-Platform Data:
-- Primary platform: [platform name]
-- Current engagement rate: [percentage]
-- Best performing content: [topics/formats]
-- Worst performing content: [topics/formats]
-- Peak posting times: [time ranges]
-- Audience demographics: [key stats]
-
-Goals:
-- Growth targets: [specific numbers]
-- Content pillars to develop: [topics]
-- Monetization goals: [if any]
-- Brand collaboration interests: [niches]`,
-        examples: [
-            'Input: "TikTok creator, 3.2% engagement rate, fashion hauls perform best, sit-down videos perform worst, seeking strategy to reach 100K followers"',
-            'Output: Detailed content calendar, trend integration plan, and engagement strategy'
-        ],
-        tips: [
-            'Include seasonal trends in your planning',
-            'Consider cross-platform synergy',
-            'Track competitor performance',
-            'Plan content batching efficiently'
-        ],
-        mediaExample: 'assets/images/analytics-dashboard.jpg',
-        tags: ['social media', 'analytics', 'growth', 'strategy']
-    },
-    {
-        id: 'low-cal-drinks',
-        category: 'wellness',
-        title: 'Smart Sipping Guide',
-        shortDescription: 'Low-calorie drink options for your next coffee or bar order',
-        content: `Create a customized drink for me:
-
-Preferences:
-- Type: [coffee/alcohol/tea]
-- Calorie limit: [max calories]
-- Sweetness level: [1-5]
-- Flavor profile: [preferred tastes]
-- Must include: [specific ingredients]
-- Must avoid: [restrictions]
-
-    For Coffee Drinks:
-    - Preferred coffee base: [espresso/cold brew/etc]
-    - Milk alternatives: [if any]
-    - Temperature: [hot/iced/both]
-
-    For Cocktails:
-    - Preferred spirits: [list]
-    - Mixer preferences: [list]
-    - Style: [fruity/dry/herb-forward]`,
-        examples: [
-            'Coffee Example: "Iced drink under 100 calories, very sweet taste, vanilla notes, no artificial sweeteners"',
-            'Cocktail Example: "Tequila-based, under 120 calories, citrus-forward, no sweet mixers"'
-        ],
-        tips: [
-            'Specify any dietary restrictions',
-            'Note if you want the drink to look Instagram-worthy',
-            'Include any allergies or sensitivities',
-            'Mention if you need the drink to be discrete (for mocktails)'
-        ],
-        mediaExample: 'assets/images/drink-options.jpg',
-        tags: ['wellness', 'nutrition', 'lifestyle', 'social']
-    },
-    {
-        id: 'career-toolkit',
-        category: 'professional',
-        title: 'Career Development Navigator',
-        shortDescription: 'Comprehensive career development tools for modern professionals',
-        content: `Create personalized career content for:
-
-Document Type:
-- Format: [resume/cover letter/email/interview prep]
-- Industry: [specific field]
-- Experience level: [entry/mid/senior]
-- Target company: [if specific]
-- Key achievements: [bullet points]
-- Unique selling points: [differentiators]
-
-Style Preferences:
-- Tone: [traditional/modern/creative]
-- Format constraints: [length/structure]
-- Keywords to include: [specific terms]
-- Personal brand elements: [if any]`,
-        examples: [
-            'Resume Example: "Tech sales resume, 3 years experience, targeting startups, highlighting revenue growth and team leadership"',
-            'Email Template: "Follow-up email after networking event, creative industry, focusing on potential collaboration"'
-        ],
-        tips: [
-            'Include relevant metrics and KPIs',
-            'Specify any industry-specific requirements',
-            'Note any application system constraints',
-            'Consider company culture in tone'
-        ],
-        mediaExample: 'assets/images/resume-example.jpg',
-        tags: ['career', 'professional', 'development', 'job search']
-    }
-];
+// Import Supabase client
+import supabase from './supabaseClient.js';
 
 // DOM Elements
 const promptLibraryRoot = document.getElementById('prompt-library-root');
@@ -338,8 +8,28 @@ const submitBtn = document.querySelector('.submit-btn');
 const closeBtn = document.querySelector('.close-modal');
 const submissionForm = document.getElementById('prompt-submission-form');
 
+// Function to fetch prompts from Supabase
+async function fetchPrompts() {
+    const { data: prompts, error } = await supabase
+        .from('prompts')
+        .select('*');
+
+    if (error) {
+        console.error('Error fetching prompts:', error);
+        return [];
+    }
+
+    // Convert stored strings back to arrays
+    return prompts.map(prompt => ({
+        ...prompt,
+        examples: prompt.examples.split('|||'),
+        tips: prompt.tips.split('|||'),
+        tags: prompt.tags.split(',')
+    }));
+}
+
 // Initialize prompt library
-function initializePromptLibrary() {
+async function initializePromptLibrary() {
     if (!promptLibraryRoot) return;
 
     // Create filter section
@@ -352,11 +42,12 @@ function initializePromptLibrary() {
             <button class="category-btn" data-category="wellness">Wellness</button>
             <button class="category-btn" data-category="entertainment">Entertainment</button>
             <button class="category-btn" data-category="fashion">Fashion</button>
-            <button class="category-btn" data-category="college">College</button> <button class="category-btn" data-category="lifestyle">Lifestyle</button>
-        <button class="category-btn" data-category="creative">Creative</button>
-        <button class="category-btn" data-category="content">Content</button>
-        <button class="category-btn" data-category="professional">Professional</button>
-    </div>
+            <button class="category-btn" data-category="college">College</button>
+            <button class="category-btn" data-category="lifestyle">Lifestyle</button>
+            <button class="category-btn" data-category="creative">Creative</button>
+            <button class="category-btn" data-category="content">Content</button>
+            <button class="category-btn" data-category="professional">Professional</button>
+        </div>
     `;
 
     // Create prompts grid
@@ -367,8 +58,12 @@ function initializePromptLibrary() {
     promptLibraryRoot.appendChild(filterSection);
     promptLibraryRoot.appendChild(promptsGrid);
 
-    // Initial render
+    // Fetch and render prompts
+    const prompts = await fetchPrompts();
     renderPrompts(prompts);
+
+    // Store prompts in state for filtering
+    window.allPrompts = prompts;
 
     // Add event listeners
     const searchInput = filterSection.querySelector('.prompt-search');
@@ -385,8 +80,8 @@ function initializePromptLibrary() {
 
 function createPromptCard(prompt) {
     // Helper function to check if media is a video
-    const isVideo = (mediaPath) => mediaPath.endsWith('.mp4');
-    const isInVideoFolder = (mediaPath) => mediaPath.includes('/videos/');
+    const isVideo = (mediaPath) => mediaPath?.endsWith('.mp4');
+    const isInVideoFolder = (mediaPath) => mediaPath?.includes('/videos/');
     const shouldBeOnSide = (mediaPath) => isVideo(mediaPath) && isInVideoFolder(mediaPath);
 
     return `
@@ -399,14 +94,14 @@ function createPromptCard(prompt) {
                     </svg>
                 </button>
             </div>
-            <p class="prompt-short-description">${prompt.shortDescription}</p>
+            <p class="prompt-short-description">${prompt.short_description}</p>
             
             <div class="prompt-card-expandable">
                 <div class="prompt-card-content">
                     <div class="prompt-content-main">
-                        ${prompt.mediaExample && !shouldBeOnSide(prompt.mediaExample) ? `
+                        ${prompt.media_url && !shouldBeOnSide(prompt.media_url) ? `
                         <div class="prompt-media-top">
-                            <img src="${prompt.mediaExample}" alt="Example for ${prompt.title}" class="prompt-image">
+                            <img src="${prompt.media_url}" alt="Example for ${prompt.title}" class="prompt-image">
                         </div>
                         ` : ''}
                         
@@ -434,10 +129,10 @@ function createPromptCard(prompt) {
                         ` : ''}
                     </div>
                     
-                    ${prompt.mediaExample && shouldBeOnSide(prompt.mediaExample) ? `
+                    ${prompt.media_url && shouldBeOnSide(prompt.media_url) ? `
                     <div class="prompt-media-side">
                         <video controls autoplay muted loop playsinline class="prompt-video">
-                            <source src="${prompt.mediaExample}" type="video/mp4">
+                            <source src="${prompt.media_url}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                     </div>
@@ -463,9 +158,9 @@ function handleSearch(e) {
     const searchQuery = e.target.value.toLowerCase();
     const activeCategory = document.querySelector('.category-btn.active').dataset.category;
     
-    const filteredPrompts = prompts.filter(prompt => {
+    const filteredPrompts = window.allPrompts.filter(prompt => {
         const matchesSearch = prompt.title.toLowerCase().includes(searchQuery) ||
-                            prompt.shortDescription.toLowerCase().includes(searchQuery) ||
+                            prompt.short_description.toLowerCase().includes(searchQuery) ||
                             prompt.content.toLowerCase().includes(searchQuery);
         const matchesCategory = activeCategory === 'all' || prompt.category === activeCategory;
         return matchesSearch && matchesCategory;
@@ -482,9 +177,9 @@ function handleCategoryFilter(e) {
     const category = e.target.dataset.category;
     const searchQuery = document.querySelector('.prompt-search').value.toLowerCase();
 
-    const filteredPrompts = prompts.filter(prompt => {
+    const filteredPrompts = window.allPrompts.filter(prompt => {
         const matchesSearch = prompt.title.toLowerCase().includes(searchQuery) ||
-                            prompt.shortDescription.toLowerCase().includes(searchQuery) ||
+                            prompt.short_description.toLowerCase().includes(searchQuery) ||
                             prompt.content.toLowerCase().includes(searchQuery);
         const matchesCategory = category === 'all' || prompt.category === category;
         return matchesSearch && matchesCategory;
@@ -514,6 +209,35 @@ function handleCardExpansion(e) {
     }
 }
 
+// Modal functionality for submitting new prompts
+async function handlePromptSubmission(formData) {
+    const { data, error } = await supabase
+        .from('prompts')
+        .insert([{
+            id: formData.title.toLowerCase().replace(/\s+/g, '-'),
+            title: formData.title,
+            category: formData.category,
+            content: formData.content,
+            short_description: '',  // Add a field for this in your form
+            examples: '[]',
+            tips: '[]',
+            tags: '',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+        }]);
+
+    if (error) {
+        console.error('Error submitting prompt:', error);
+        alert('Failed to submit prompt. Please try again.');
+        return false;
+    }
+
+    // Refresh prompts
+    window.allPrompts = await fetchPrompts();
+    renderPrompts(window.allPrompts);
+    return true;
+}
+
 // Modal functionality
 function openSubmissionForm() {
     if (modal) modal.style.display = 'block';
@@ -534,7 +258,7 @@ if (modal) {
 }
 
 if (submissionForm) {
-    submissionForm.onsubmit = function(event) {
+    submissionForm.onsubmit = async function(event) {
         event.preventDefault();
         
         const formData = {
@@ -543,12 +267,13 @@ if (submissionForm) {
             content: document.getElementById('prompt-content').value
         };
 
-        console.log('Prompt submitted:', formData);
+        const success = await handlePromptSubmission(formData);
         
-        submissionForm.reset();
-        closeModal();
-        
-        alert('Thank you for your submission!');
+        if (success) {
+            submissionForm.reset();
+            closeModal();
+            alert('Thank you for your submission!');
+        }
     };
 }
 
