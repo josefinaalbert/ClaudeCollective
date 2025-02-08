@@ -95,7 +95,6 @@ async function initializePromptLibrary() {
         errorContainer.style.display = 'none';
         renderPrompts(prompts);
     }
-}
 
     // Store prompts in state for filtering
     window.allPrompts = prompts;
@@ -111,7 +110,7 @@ async function initializePromptLibrary() {
 
     // Add click listener for expanding cards
     promptsGrid.addEventListener('click', handleCardExpansion);
-
+}
 
 function createPromptCard(prompt) {
     // Helper function to check if media is a video
