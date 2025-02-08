@@ -8,6 +8,7 @@ const submitBtn = document.querySelector('.submit-btn');
 const closeBtn = document.querySelector('.close-modal');
 const submissionForm = document.getElementById('prompt-submission-form');
 
+// Fetch prompts from Supabase
 async function fetchPrompts() {
     try {
         console.log('Fetching prompts...');
@@ -15,28 +16,24 @@ async function fetchPrompts() {
             .from('prompts')
             .select('*');
 
-        console.log('Received data:', prompts);
-        console.log('Received error:', error);
-
         if (error) {
             console.error('Error fetching prompts:', error);
             return [];
         }
 
-        // Make sure prompts exist and have the expected structure
         if (!prompts || !Array.isArray(prompts)) {
             console.error('Invalid prompts data:', prompts);
             return [];
         }
 
-        // Convert stored strings back to arrays
         return prompts.map(prompt => {
             try {
                 return {
                     ...prompt,
-                    examples: prompt.examples ? prompt.examples.split('|||') : [],
-                    tips: prompt.tips ? prompt.tips.split('|||') : [],
-                    tags: prompt.tags ? prompt.tags.split(',') : []
+                    // Store content as markdown instead of using separators
+                    examples: prompt.examples || '',
+                    tips: prompt.tips || '',
+                    tags: prompt.tags ? prompt.tags.split(',').map(tag => tag.trim()) : []
                 };
             } catch (e) {
                 console.error('Error processing prompt:', prompt, e);
@@ -87,7 +84,7 @@ async function initializePromptLibrary() {
     promptLibraryRoot.appendChild(promptsGrid);
 
     // Fetch and render prompts
-     const prompts = await fetchPrompts();
+    const prompts = await fetchPrompts();
     if (prompts.length === 0) {
         errorContainer.style.display = 'block';
         errorContainer.textContent = 'No prompts found. Please check console for errors.';
@@ -113,6 +110,17 @@ async function initializePromptLibrary() {
 }
 
 function createPromptCard(prompt) {
+    // Helper function to safely parse markdown
+    const parseMarkdown = (text) => {
+        if (!text) return '';
+        try {
+            return marked.parse(text);
+        } catch (e) {
+            console.error('Error parsing markdown:', e);
+            return text;
+        }
+    };
+
     // Helper function to check if media is a video
     const isVideo = (mediaPath) => mediaPath?.endsWith('.mp4');
     const isInVideoFolder = (mediaPath) => mediaPath?.includes('/videos/');
@@ -147,18 +155,18 @@ function createPromptCard(prompt) {
                         ${prompt.examples ? `
                         <div class="prompt-section">
                             <h4>Examples</h4>
-                            <ul class="prompt-examples">
-                                ${prompt.examples.map(example => `<li>${example}</li>`).join('')}
-                            </ul>
+                            <div class="prompt-examples formatted-content">
+                                ${parseMarkdown(prompt.examples)}
+                            </div>
                         </div>
                         ` : ''}
                         
                         ${prompt.tips ? `
                         <div class="prompt-section">
                             <h4>Tips</h4>
-                            <ul class="prompt-tips">
-                                ${prompt.tips.map(tip => `<li>${tip}</li>`).join('')}
-                            </ul>
+                            <div class="prompt-tips formatted-content">
+                                ${parseMarkdown(prompt.tips)}
+                            </div>
                         </div>
                         ` : ''}
                     </div>
@@ -184,8 +192,38 @@ function createPromptCard(prompt) {
 function renderPrompts(promptsToRender) {
     const promptsGrid = document.querySelector('.prompts-grid');
     if (!promptsGrid) return;
-
     promptsGrid.innerHTML = promptsToRender.map(prompt => createPromptCard(prompt)).join('');
+}
+
+function handleCardExpansion(e) {
+    const card = e.target.closest('.prompt-card');
+    if (!card) return;
+
+    const expandBtn = card.querySelector('.expand-btn');
+    if (!expandBtn.contains(e.target) && !e.target.matches('.expand-btn')) return;
+
+    // Close any currently expanded cards
+    const currentlyExpanded = document.querySelector('.prompt-card.expanded');
+    if (currentlyExpanded && currentlyExpanded !== card) {
+        currentlyExpanded.classList.remove('expanded');
+        const expandedContent = currentlyExpanded.querySelector('.prompt-card-expandable');
+        expandedContent.style.height = '0';
+        currentlyExpanded.querySelector('.expand-btn').setAttribute('aria-expanded', 'false');
+    }
+
+    // Toggle the clicked card
+    const expandableContent = card.querySelector('.prompt-card-expandable');
+    const isExpanded = card.classList.toggle('expanded');
+    
+    // Update aria-expanded state
+    expandBtn.setAttribute('aria-expanded', isExpanded);
+    
+    // Smooth height transition
+    if (isExpanded) {
+        expandableContent.style.height = expandableContent.scrollHeight + 'px';
+    } else {
+        expandableContent.style.height = '0';
+    }
 }
 
 function handleSearch(e) {
@@ -222,27 +260,6 @@ function handleCategoryFilter(e) {
     renderPrompts(filteredPrompts);
 }
 
-function handleCardExpansion(e) {
-    const card = e.target.closest('.prompt-card');
-    if (!card) return;
-
-    const expandBtn = card.querySelector('.expand-btn');
-    if (!expandBtn.contains(e.target) && !e.target.matches('.expand-btn')) return;
-
-    const expandableContent = card.querySelector('.prompt-card-expandable');
-    const isExpanded = card.classList.toggle('expanded');
-    
-    // Update aria-expanded state
-    expandBtn.setAttribute('aria-expanded', isExpanded);
-    
-    // Smooth height transition
-    if (isExpanded) {
-        expandableContent.style.height = expandableContent.scrollHeight + 'px';
-    } else {
-        expandableContent.style.height = '0';
-    }
-}
-
 // Modal functionality for submitting new prompts
 async function handlePromptSubmission(formData) {
     const { data, error } = await supabase
@@ -252,10 +269,10 @@ async function handlePromptSubmission(formData) {
             title: formData.title,
             category: formData.category,
             content: formData.content,
-            short_description: '',  // Add a field for this in your form
-            examples: '[]',
-            tips: '[]',
-            tags: '',
+            short_description: formData.shortDescription || '',
+            examples: formData.examples || '',
+            tips: formData.tips || '',
+            tags: formData.tags || '',
             created_at: new Date().toISOString(),
             updated_at: new Date().toISOString()
         }]);
@@ -298,7 +315,11 @@ if (submissionForm) {
         const formData = {
             category: document.getElementById('prompt-category').value,
             title: document.getElementById('prompt-title').value,
-            content: document.getElementById('prompt-content').value
+            content: document.getElementById('prompt-content').value,
+            shortDescription: document.getElementById('prompt-short-description')?.value || '',
+            examples: document.getElementById('prompt-examples')?.value || '',
+            tips: document.getElementById('prompt-tips')?.value || '',
+            tags: document.getElementById('prompt-tags')?.value || ''
         };
 
         const success = await handlePromptSubmission(formData);
