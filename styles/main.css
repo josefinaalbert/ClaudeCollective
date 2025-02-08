@@ -211,27 +211,68 @@ body {
     padding: 4rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
+    /* Set a fixed height for the entire section */
+    height: 800px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
 }
+
+#prompt-library-root {
+    flex: 1;
+    overflow-y: auto;
+    position: relative;
+    padding: 1rem;
+    border: 1px solid #eee;
+    border-radius: var(--border-radius);
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#prompt-library-root::-webkit-scrollbar {
+    width: 8px;
+}
+
+#prompt-library-root::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#prompt-library-root::-webkit-scrollbar-thumb {
+    background: var(--secondary-color);
+    border-radius: 4px;
+}
+
+#prompt-library-root::-webkit-scrollbar-thumb:hover {
+    background: #6ca3b2;
+}
+
 
 /* Prompt Library Filters */
 .prompt-filters {
-    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    background: white;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+    z-index: 10;
+    border-bottom: 1px solid #eee;
 }
 
+
 .prompt-search {
-    width: 100%;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: var(--border-radius);
-    font-size: 1rem;
+    position: sticky;
+    top: 0;
+    background: white;
+    z-index: 11;
 }
 
 .category-filters {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
+    position: sticky;
+    top: 60px;
+    background: white;
+    z-index: 11;
+    padding: 0.5rem 0;
 }
 
 .category-btn {
@@ -252,10 +293,11 @@ body {
 
 /* Prompt Cards Grid */
 .prompts-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
-    width:100%
+    padding-bottom: 2rem;
 }
 
 /* Prompt Card Styles */
@@ -446,6 +488,15 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .prompt-library {
+        padding: 2rem 1rem;
+        height: 600px; /* Smaller height on mobile */
+    }
+    
+    .prompts-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+
+    }
     .videos-row {
         flex-direction: column;
         align-items: center;
@@ -458,6 +509,9 @@ body {
 
     .prompt-card.expanded {
         margin: 0 1rem;
+        max-width: none;
+        width: 100%;
+
     }
 
     .category-filters {

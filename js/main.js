@@ -8,29 +8,57 @@ const submitBtn = document.querySelector('.submit-btn');
 const closeBtn = document.querySelector('.close-modal');
 const submissionForm = document.getElementById('prompt-submission-form');
 
-// Function to fetch prompts from Supabase
 async function fetchPrompts() {
-    const { data: prompts, error } = await supabase
-        .from('prompts')
-        .select('*');
+    try {
+        console.log('Fetching prompts...');
+        const { data: prompts, error } = await supabase
+            .from('prompts')
+            .select('*');
 
-    if (error) {
-        console.error('Error fetching prompts:', error);
+        console.log('Received data:', prompts);
+        console.log('Received error:', error);
+
+        if (error) {
+            console.error('Error fetching prompts:', error);
+            return [];
+        }
+
+        // Make sure prompts exist and have the expected structure
+        if (!prompts || !Array.isArray(prompts)) {
+            console.error('Invalid prompts data:', prompts);
+            return [];
+        }
+
+        // Convert stored strings back to arrays
+        return prompts.map(prompt => {
+            try {
+                return {
+                    ...prompt,
+                    examples: prompt.examples ? prompt.examples.split('|||') : [],
+                    tips: prompt.tips ? prompt.tips.split('|||') : [],
+                    tags: prompt.tags ? prompt.tags.split(',') : []
+                };
+            } catch (e) {
+                console.error('Error processing prompt:', prompt, e);
+                return prompt;
+            }
+        });
+    } catch (e) {
+        console.error('Exception in fetchPrompts:', e);
         return [];
     }
-
-    // Convert stored strings back to arrays
-    return prompts.map(prompt => ({
-        ...prompt,
-        examples: prompt.examples.split('|||'),
-        tips: prompt.tips.split('|||'),
-        tags: prompt.tags.split(',')
-    }));
 }
 
 // Initialize prompt library
 async function initializePromptLibrary() {
     if (!promptLibraryRoot) return;
+
+    // Create error message container
+    const errorContainer = document.createElement('div');
+    errorContainer.style.display = 'none';
+    errorContainer.style.color = 'red';
+    errorContainer.style.padding = '1rem';
+    promptLibraryRoot.appendChild(errorContainer);
 
     // Create filter section
     const filterSection = document.createElement('div');
@@ -59,8 +87,15 @@ async function initializePromptLibrary() {
     promptLibraryRoot.appendChild(promptsGrid);
 
     // Fetch and render prompts
-    const prompts = await fetchPrompts();
-    renderPrompts(prompts);
+     const prompts = await fetchPrompts();
+    if (prompts.length === 0) {
+        errorContainer.style.display = 'block';
+        errorContainer.textContent = 'No prompts found. Please check console for errors.';
+    } else {
+        errorContainer.style.display = 'none';
+        renderPrompts(prompts);
+    }
+}
 
     // Store prompts in state for filtering
     window.allPrompts = prompts;
@@ -76,7 +111,7 @@ async function initializePromptLibrary() {
 
     // Add click listener for expanding cards
     promptsGrid.addEventListener('click', handleCardExpansion);
-}
+
 
 function createPromptCard(prompt) {
     // Helper function to check if media is a video
