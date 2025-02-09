@@ -121,10 +121,17 @@ function createPromptCard(prompt) {
         }
     };
 
-    // Helper function to check if media is a video
-    const isVideo = (mediaPath) => mediaPath?.endsWith('.mp4');
-    const isInVideoFolder = (mediaPath) => mediaPath?.includes('/videos/');
-    const shouldBeOnSide = (mediaPath) => isVideo(mediaPath) && isInVideoFolder(mediaPath);
+    // Improved video detection
+    const isVideo = (mediaPath) => {
+        if (!mediaPath) return false;
+        const path = mediaPath.toLowerCase();
+        return path.endsWith('.mp4') || 
+               path.includes('/videos/') ||
+               path.includes('video');
+    };
+
+    // Determine if media should be on side
+    const shouldBeOnSide = (mediaPath) => isVideo(mediaPath);
 
     return `
         <div class="prompt-card" data-id="${prompt.id}">
@@ -173,7 +180,16 @@ function createPromptCard(prompt) {
                     
                     ${prompt.media_url && shouldBeOnSide(prompt.media_url) ? `
                     <div class="prompt-media-side">
-                        <video controls autoplay muted loop playsinline class="prompt-video">
+                        <video 
+                            class="prompt-video"
+                            autoplay
+                            muted
+                            loop
+                            playsinline
+                            controls
+                            onplay="this.parentElement.classList.add('video-playing')"
+                            onerror="this.parentElement.innerHTML='<div class=\'video-error\'>Unable to load video</div>'"
+                        >
                             <source src="${prompt.media_url}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
