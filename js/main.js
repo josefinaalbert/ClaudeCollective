@@ -332,5 +332,35 @@ if (submissionForm) {
     };
 }
 
+function initializeCollapsibleSections() {
+    const collapsibles = document.querySelectorAll('.collapsible');
+    
+    collapsibles.forEach(collapsible => {
+        // Get the section content (next sibling after the h2)
+        const content = collapsible.parentElement.querySelector('.section-content');
+        
+        // Set initial state
+        if (!content.classList.contains('show')) {
+            content.style.maxHeight = '0';
+            collapsible.parentElement.classList.add('collapsed');
+        }
+        
+        collapsible.addEventListener('click', function() {
+            // Toggle the collapsed state
+            const isCollapsed = this.parentElement.classList.toggle('collapsed');
+            
+            // Toggle content visibility
+            if (!isCollapsed) {
+                content.style.maxHeight = content.scrollHeight + 'px';
+            } else {
+                content.style.maxHeight = '0';
+            }
+        });
+    });
+}
+
 // Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializePromptLibrary);
+document.addEventListener('DOMContentLoaded', () => {
+    initializePromptLibrary();
+    initializeCollapsibleSections(); // Add this line
+});

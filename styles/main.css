@@ -129,6 +129,7 @@ body {
 .project-section h2::after {
     content: '▼';
     font-size: 0.8em;
+    margin-left: 0.5rem;
     transition: transform 0.3s ease;
 }
 
