@@ -105,16 +105,16 @@ body {
 }
 
 .video-container {
-    width: 342px;
-    height: 600px;
+    width: 42px;
+    height: 100px;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .logo-container {
-    width: 342px; /* Adjust based on your logo size */
-    height: 600px; /* Adjust based on your logo size */
+    width: 100px; /* Adjust based on your logo size */
+    height: 100px; /* Adjust based on your logo size */
     display: flex;
     justify-content: center;
     align-items: center;
