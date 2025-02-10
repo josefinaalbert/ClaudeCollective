@@ -114,9 +114,9 @@ body {
     justify-content: center;
     align-items: center;
     gap: 2rem;
-    margin: 2rem auto;
-    max-width: 1400px;
-    padding: 0 2rem;
+    margin: 0 0rem auto;
+    max-width: 2000px;
+    padding: 0 1rem;
 }
 
 .video-container {
@@ -177,9 +177,7 @@ body {
     transition: max-height 0.3s ease-in-out;
 }
 
-.collapsed .section-content {
-    max-height: 0;
-}
+
 
 .project-section p, 
 .project-section ul {
@@ -188,13 +186,6 @@ body {
     color: #4a4a4a;
 }
 
-.project-section ul {
-    padding-left: 1.5rem;
-}
-
-.project-section li {
-    margin-bottom: 0.8rem;
-}
 
 .project-image-container {
     margin: 1rem 0;
