@@ -24,7 +24,7 @@ body {
 .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem;
+    padding: 0 4rem;
     box-sizing: border-box;
 }
 
@@ -69,6 +69,13 @@ body {
 }
 
 /* Hero Section */
+
+.hero-logo {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 .hero-section {
     padding: 8rem 2rem 4rem;
     text-align: center;
@@ -90,17 +97,28 @@ body {
 .videos-row {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 2rem;
     margin: 2rem auto;
-    max-width: 1200px;
+    max-width: 1400px;
+    padding: 0 2rem;
 }
 
 .video-container {
-    width: 400px;
-    height: 700px;
+    width: 342px;
+    height: 600px;
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.logo-container {
+    width: 342px; /* Adjust based on your logo size */
+    height: 600px; /* Adjust based on your logo size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
 }
 
 .video-container video {
@@ -668,6 +686,30 @@ footer {
 }
 
 /* Responsive Design */
+@media (max-width: 1200px) {
+    .content-wrapper {
+        padding: 0 2rem;
+    }
+}
+@media (max-width: 768px) {
+    .videos-row {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .logo-container {
+        width: 150px;
+        height: 150px;
+        margin: 2rem 0;
+    }
+
+    .video-container {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
 @media (max-width: 1024px) {
     .prompt-card.expanded .prompt-content-main {
         flex: 1;
