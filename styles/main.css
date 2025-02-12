@@ -166,6 +166,7 @@ body {
     display: flex;
     justify-content: center
 }
+
 /* Collapsible Components */
 .collapsible {
     cursor: pointer;

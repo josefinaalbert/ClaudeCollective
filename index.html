@@ -129,11 +129,27 @@
                 </div>
                 <div class="form-group">
                     <label for="prompt-title">Title</label>
-                    <input type="text" id="prompt-title" required>
+                    <input type="text" id="prompt-title" name="title" required>
                 </div>
                 <div class="form-group">
-                    <label for="prompt-content">Prompt</label>
-                    <textarea id="prompt-content" required></textarea>
+                    <label for="prompt-content">Content</label>
+                    <textarea id="prompt-content" name="content" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-short-description">Short Description</label>
+                    <textarea id="prompt-short-description" name="short_description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-examples">Examples</label>
+                    <textarea id="prompt-examples" name="examples"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-tips">Tips</label>
+                    <textarea id="prompt-tips" name="tips"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prompt-tags">Tags (comma-separated)</label>
+                    <input type="text" id="prompt-tags" name="tags">
                 </div>
                 <button type="submit" class="submit-btn">Submit</button>
             </form>

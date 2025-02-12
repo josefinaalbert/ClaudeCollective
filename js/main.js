@@ -317,60 +317,56 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.querySelector('.close-modal');
     const submissionForm = document.getElementById('prompt-submission-form');
 
-    // Open modal handler
-    if (submitBtn) {
-        submitBtn.addEventListener('click', () => {
-            if (modal) modal.style.display = 'block';
-        });
+     // Modal opening function
+    window.openSubmissionForm = function() {
+        if (modal) modal.style.display = 'block';
+    };
+
+    // Modal closing function
+    function closeModal() {
+        if (modal) modal.style.display = 'none';
     }
 
-    // Close modal handler
+    // Close button handler
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
-            if (modal) modal.style.display = 'none';
-        });
+        closeBtn.addEventListener('click', closeModal);
     }
 
     // Form submission handler
     if (submissionForm) {
-        submissionForm.addEventListener('submit', async (event) => {
+        submissionForm.addEventListener('submit', async function(event) {
             event.preventDefault();
             
-            const formData = {
-                category: document.getElementById('prompt-category').value,
-                title: document.getElementById('prompt-title').value,
-                content: document.getElementById('prompt-content').value,
-                shortDescription: document.getElementById('prompt-short-description')?.value || '',
-                examples: document.getElementById('prompt-examples')?.value || '',
-                tips: document.getElementById('prompt-tips')?.value || '',
-                tags: document.getElementById('prompt-tags')?.value || '',
-                status: 'pending' // Add a status field for moderation
-            };
-
             try {
+                const formData = {
+                    id: document.getElementById('prompt-title').value.toLowerCase().replace(/\s+/g, '-'),
+                    title: document.getElementById('prompt-title').value,
+                    category: document.getElementById('prompt-category').value,
+                    content: document.getElementById('prompt-content').value,
+                    short_description: document.getElementById('prompt-short-description').value,
+                    examples: document.getElementById('prompt-examples').value,
+                    tips: document.getElementById('prompt-tips').value,
+                    tags: document.getElementById('prompt-tags').value,
+                    created_at: new Date().toISOString(),
+                    updated_at: new Date().toISOString(),
+                    status: 'pending'
+                };
+
+                console.log('Submitting form data:', formData); // Debug log
+
                 const { data, error } = await supabase
                     .from('prompts')
-                    .insert([{
-                        ...formData,
-                        id: formData.title.toLowerCase().replace(/\s+/g, '-'),
-                        created_at: new Date().toISOString(),
-                        updated_at: new Date().toISOString()
-                    }]);
+                    .insert([formData]);
 
                 if (error) throw error;
 
-                // Success handling
                 submissionForm.reset();
-                modal.style.display = 'none';
-                alert('Thank you for your submission! It will be reviewed shortly.');
-                
-                // Optionally refresh the prompts display
-                const prompts = await fetchPrompts();
-                renderPrompts(prompts);
-                
+                closeModal();
+                alert('Thank you for your submission!');
+
             } catch (error) {
                 console.error('Error submitting prompt:', error);
-                alert('Failed to submit prompt. Please try again.');
+                alert(`Failed to submit prompt: ${error.message}`);
             }
         });
     }
