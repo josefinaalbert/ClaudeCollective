@@ -13,7 +13,7 @@ async function fetchPrompts() {
     try {
         console.log('Fetching prompts...');
         const { data: prompts, error } = await supabase
-            .from('prompts')
+            .from('public_prompts')
             .select('*');
 
         if (error) {
@@ -276,77 +276,6 @@ function handleCategoryFilter(e) {
     renderPrompts(filteredPrompts);
 }
 
-// Modal functionality for submitting new prompts
-async function handlePromptSubmission(formData) {
-    const { data, error } = await supabase
-        .from('prompts')
-        .insert([{
-            id: formData.title.toLowerCase().replace(/\s+/g, '-'),
-            title: formData.title,
-            category: formData.category,
-            content: formData.content,
-            short_description: formData.shortDescription || '',
-            examples: formData.examples || '',
-            tips: formData.tips || '',
-            tags: formData.tags || '',
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString()
-        }]);
-
-    if (error) {
-        console.error('Error submitting prompt:', error);
-        alert('Failed to submit prompt. Please try again.');
-        return false;
-    }
-
-    // Refresh prompts
-    window.allPrompts = await fetchPrompts();
-    renderPrompts(window.allPrompts);
-    return true;
-}
-
-// Modal functionality
-function openSubmissionForm() {
-    if (modal) modal.style.display = 'block';
-}
-
-function closeModal() {
-    if (modal) modal.style.display = 'none';
-}
-
-// Event listeners
-if (closeBtn) closeBtn.onclick = closeModal;
-if (modal) {
-    window.onclick = function(event) {
-        if (event.target === modal) {
-            closeModal();
-        }
-    };
-}
-
-if (submissionForm) {
-    submissionForm.onsubmit = async function(event) {
-        event.preventDefault();
-        
-        const formData = {
-            category: document.getElementById('prompt-category').value,
-            title: document.getElementById('prompt-title').value,
-            content: document.getElementById('prompt-content').value,
-            shortDescription: document.getElementById('prompt-short-description')?.value || '',
-            examples: document.getElementById('prompt-examples')?.value || '',
-            tips: document.getElementById('prompt-tips')?.value || '',
-            tags: document.getElementById('prompt-tags')?.value || ''
-        };
-
-        const success = await handlePromptSubmission(formData);
-        
-        if (success) {
-            submissionForm.reset();
-            closeModal();
-            alert('Thank you for your submission!');
-        }
-    };
-}
 
 function initializeCollapsibleSections() {
     const collapsibles = document.querySelectorAll('.collapsible');
@@ -379,4 +308,70 @@ function initializeCollapsibleSections() {
 document.addEventListener('DOMContentLoaded', () => {
     initializePromptLibrary();
     initializeCollapsibleSections(); // Add this line
+
+
+
+    // Initialize form submission handlers
+    const submitBtn = document.querySelector('.submit-btn');
+    const modal = document.getElementById('submission-modal');
+    const closeBtn = document.querySelector('.close-modal');
+    const submissionForm = document.getElementById('prompt-submission-form');
+
+    // Open modal handler
+    if (submitBtn) {
+        submitBtn.addEventListener('click', () => {
+            if (modal) modal.style.display = 'block';
+        });
+    }
+
+    // Close modal handler
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            if (modal) modal.style.display = 'none';
+        });
+    }
+
+    // Form submission handler
+    if (submissionForm) {
+        submissionForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            
+            const formData = {
+                category: document.getElementById('prompt-category').value,
+                title: document.getElementById('prompt-title').value,
+                content: document.getElementById('prompt-content').value,
+                shortDescription: document.getElementById('prompt-short-description')?.value || '',
+                examples: document.getElementById('prompt-examples')?.value || '',
+                tips: document.getElementById('prompt-tips')?.value || '',
+                tags: document.getElementById('prompt-tags')?.value || '',
+                status: 'pending' // Add a status field for moderation
+            };
+
+            try {
+                const { data, error } = await supabase
+                    .from('prompts')
+                    .insert([{
+                        ...formData,
+                        id: formData.title.toLowerCase().replace(/\s+/g, '-'),
+                        created_at: new Date().toISOString(),
+                        updated_at: new Date().toISOString()
+                    }]);
+
+                if (error) throw error;
+
+                // Success handling
+                submissionForm.reset();
+                modal.style.display = 'none';
+                alert('Thank you for your submission! It will be reviewed shortly.');
+                
+                // Optionally refresh the prompts display
+                const prompts = await fetchPrompts();
+                renderPrompts(prompts);
+                
+            } catch (error) {
+                console.error('Error submitting prompt:', error);
+                alert('Failed to submit prompt. Please try again.');
+            }
+        });
+    }
 });
