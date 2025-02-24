@@ -418,18 +418,25 @@ body {
 /* Prompt Card Styles */
 .prompt-card {
     background: white;
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
     transition: all 0.3s ease;
     width: 100%;
+    border: 1px solid rgba(0,0,0,0.03);
+}
+
+.prompt-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
 }
 
 .prompt-card.expanded {
     grid-column: 1 / -1;
     max-width: 100%;
     margin: 0 auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    border-top: 3px solid var(--secondary-color);
 }
 
 @media (max-width: 767px) {
@@ -450,6 +457,7 @@ body {
 .prompt-card-header h3 {
     font-size: clamp(1rem, 4vw, 1.2rem);
     color: var(--primary-color);
+    font-weight: 600;
 }
 
 .expand-btn {
@@ -458,6 +466,7 @@ body {
     padding: 0.5rem;
     cursor: pointer;
     transition: transform 0.3s ease;
+    color: var(--secondary-color);
 }
 
 .expanded .expand-btn {
@@ -469,6 +478,7 @@ body {
     color: var(--text-color);
     margin-bottom: 0.5rem;
     font-size: clamp(0.85rem, 3vw, 0.95rem);
+    line-height: 1.5;
 }
 
 .prompt-card-expandable {
@@ -492,8 +502,8 @@ body {
 }
 
 .prompt-template {
-    background: #f8f8f8;
-    padding: 1rem;
+    background: #f3f7f8;
+    padding: 1.2rem;
     border-radius: var(--border-radius);
     font-family: monospace;
     white-space: pre-wrap;
@@ -501,6 +511,9 @@ body {
     line-height: 1.5;
     overflow-x: auto;
     width: 100%;
+    border-left: 3px solid var(--secondary-color);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    margin: 1.5rem 0;
 }
 
 .prompt-examples,
@@ -528,11 +541,15 @@ body {
 
 /* Tags */
 .prompt-tags {
-    display: flex;
+    display: none; /* Hide tags on collapsed cards */
     gap: 0.25rem;
     flex-wrap: wrap;
     margin-top: 0.5rem;
     width: 100%;
+}
+
+.expanded .prompt-tags {
+    display: flex; /* Only show tags when card is expanded */
 }
 
 .tag {
@@ -1191,70 +1208,109 @@ body {
     font-size: 1.2rem;
     color: #555;
     margin-bottom: 2rem;
+    background-color: rgba(107, 163, 178, 0.08);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--secondary-color);
 }
 
 .guide-intro p {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .guide-section {
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
 }
 
 .guide-section h2 {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.2rem;
     color: var(--primary-color);
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.guide-section h2::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--secondary-color);
 }
 
 .guide-section h3 {
     font-size: 1.4rem;
-    margin: 1.5rem 0 1rem;
+    margin: 1.5rem 0 0.8rem;
     color: #444;
+    font-weight: 600;
 }
 
 .guide-section p {
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.guide-section strong {
+    color: var(--secondary-color);
+    font-weight: 600;
 }
 
 .guide-section ul, 
 .guide-section ol {
-    margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-left: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding-right: 1rem;
 }
 
 .guide-section li {
     margin-bottom: 0.5rem;
+    position: relative;
 }
 
 .guide-prompt {
-    margin: 1.5rem 0;
+    margin: 2rem 0;
     font-family: monospace;
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     white-space: pre-wrap;
+    background-color: #f3f7f8;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    border-left: 3px solid var(--secondary-color);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
 }
 
 .prompt-example {
-    background: #f8f8f8;
-    padding: 1rem;
+    background: rgba(232, 195, 150, 0.15);
+    padding: 1.2rem;
     border-radius: var(--border-radius);
-    margin: 1rem 0;
+    margin: 1.2rem 0;
     font-style: italic;
+    border-left: 3px solid var(--accent-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
 .example-playlist {
-    background: #f8f8f8;
-    padding: 1.5rem;
+    background: linear-gradient(to right, #f8f8f8, #fff);
+    padding: 1.2rem 1.5rem;
     border-radius: var(--border-radius);
     margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.example-playlist h3 {
+    color: var(--secondary-color) !important;
+    margin-bottom: 1rem !important;
+    font-size: 1.2rem !important;
 }
 
 .playlist-sample {
     background: white;
-    padding: 1rem;
+    padding: 1.2rem;
     border-radius: var(--border-radius);
     max-height: 300px;
     overflow-y: auto;
+    border: 1px solid rgba(0,0,0,0.08);
 }
 
 .playlist-sample ol {
@@ -1262,11 +1318,17 @@ body {
     margin-bottom: 0;
 }
 
+.playlist-sample li {
+    padding-left: 0.3rem;
+}
+
 .guide-conclusion {
-    background: #f8f8f8;
+    background: linear-gradient(135deg, rgba(107, 163, 178, 0.1) 0%, rgba(107, 163, 178, 0.05) 100%);
     padding: 2rem;
     border-radius: var(--border-radius);
-    margin-top: 3rem;
+    margin-top: 2rem;
+    border-top: 3px solid var(--secondary-color);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.05);
 }
 
 /* Sidebar */
@@ -1281,8 +1343,9 @@ body {
     background: white;
     padding: 1.5rem;
     border-radius: var(--border-radius);
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.07);
     margin-bottom: 2rem;
+    border-top: 3px solid var(--accent-color);
 }
 
 .related-guides h3,
