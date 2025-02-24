@@ -132,6 +132,20 @@ function createPromptCard(prompt) {
 
     // Determine if media should be on side
     const shouldBeOnSide = (mediaPath) => isVideo(mediaPath);
+    
+    // Check if this prompt has a related guide
+    const hasGuide = prompt.has_guide || false;
+    
+    // Map of prompt categories to their corresponding guide pages
+    const categoryToGuide = {
+        'entertainment': 'guide-template.html',
+        'education': 'study-guide.html',
+        'finance': 'finance-guide.html',
+        'marketing': 'marketing-guide.html'
+    };
+    
+    // Determine guide URL if applicable
+    const guideUrl = categoryToGuide[prompt.category] || 'guides.html';
 
     return `
         <div class="prompt-card" data-id="${prompt.id}">
@@ -174,6 +188,17 @@ function createPromptCard(prompt) {
                             <div class="prompt-tips formatted-content">
                                 ${parseMarkdown(prompt.tips)}
                             </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${hasGuide ? `
+                        <div class="prompt-section guide-link-section">
+                            <a href="${guideUrl}" class="guide-link-btn">
+                                View Complete Guide
+                                <svg viewBox="0 0 24 24" width="16" height="16" style="margin-left: 5px;">
+                                    <path d="M5 12h14M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                            </a>
                         </div>
                         ` : ''}
                     </div>
