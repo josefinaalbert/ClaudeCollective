@@ -237,6 +237,23 @@ body {
     box-shadow: 0 5px 15px rgba(107, 163, 178, 0.2);
 }
 
+/* Mobile-specific button styles */
+@media (max-width: 480px) {
+    .hero-actions {
+        padding: 0 0.5rem;
+        margin: 1rem auto 1.5rem;
+        gap: 0.75rem;
+    }
+    
+    .hero-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        width: auto;
+        min-width: 120px;
+        text-align: center;
+    }
+}
+
 
 /* Project Section */
 .project-section {
@@ -1940,6 +1957,13 @@ footer::before {
     
     .hero-content p {
         font-size: 0.8rem !important;
+        margin-bottom: 1rem;
+    }
+    
+    .hero-actions {
+        width: 100%;
+        padding: 0 1rem;
+        justify-content: center;
     }
     
     .project-section {
