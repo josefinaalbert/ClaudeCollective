@@ -25,24 +25,28 @@ body {
     color: var(--text-color);
     background-color: var(--background-color);
     letter-spacing: 0.01em;
+    width: 100%;
+    overflow-x: hidden;
 }
 
 /* Layout Containers */
 .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 8rem !important;
+    padding: 0 20px;
+    width: 100%;
     box-sizing: border-box;
 }
 
 .page-wrapper {
     overflow-x: hidden;
+    width: 100%;
 }
 
 /* Navigation */
 .main-nav {
     background: var(--card-color);
-    padding: 1.2rem 2rem;
+    padding: 1rem;
     box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     position: fixed;
     width: 100%;
@@ -57,6 +61,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -64,12 +69,15 @@ body {
     letter-spacing: 0.03em;
     font-size: 1.2rem;
     color: var(--primary-color);
+    padding: 0.5rem 0;
 }
 
 .nav-links {
     display: flex;
-    gap: 2.5rem;
+    gap: 1.5rem;
     list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .nav-links a {
@@ -80,6 +88,7 @@ body {
     transition: var(--transition);
     position: relative;
     padding-bottom: 4px;
+    display: inline-block;
 }
 
 .nav-links a::after {
@@ -109,7 +118,7 @@ body {
 }
 
 .title-logo {
-    max-width: 600px;
+    max-width: 100%;
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -117,9 +126,8 @@ body {
 }
 
 .hero-logo {
-    max-width: 550px !important;
-    max-height: 550px !important;
-    width: auto !important;
+    max-width: 300px !important;
+    width: 100% !important;
     height: auto !important;
     object-fit: contain !important;
     position: relative !important;
@@ -127,10 +135,11 @@ body {
 }
 
 .hero-section {
-    padding: 10rem 2rem 6rem;
+    padding: 8rem 1rem 4rem;
     text-align: center;
     background: linear-gradient(to bottom, var(--background-color), white);
     position: relative;
+    width: 100%;
 }
 
 .hero-section::after {
@@ -145,14 +154,16 @@ body {
 }
 
 .hero-content {
+    width: 100%;
     max-width: 800px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 3rem;
     position: relative;
     z-index: 1;
+    padding: 0 1rem;
 }
 
 .hero-content h1 {
-    font-size: 2.8rem;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     font-weight: 600;
@@ -160,7 +171,7 @@ body {
 }
 
 .hero-content p {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     line-height: 1.7;
     color: var(--light-text);
     max-width: 600px;
@@ -171,12 +182,13 @@ body {
 /* Project Section */
 .project-section {
     background: var(--card-color);
-    padding: 2.5rem;
-    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
     box-shadow: var(--box-shadow);
     box-sizing: border-box;
     border-radius: var(--border-radius);
     transition: var(--transition);
+    width: 100%;
 }
 
 .project-section:hover {
@@ -190,7 +202,7 @@ body {
     align-items: center;
     cursor: pointer;
     user-select: none;
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
 }
 
 .project-section h2::after {
@@ -208,29 +220,37 @@ body {
     max-height: 2000px;
     overflow: hidden;
     transition: max-height 0.3s ease-in-out;
+    width: 100%;
 }
-
 
 .project-section p, 
 .project-section ul {
     line-height: 1.8;
     margin-bottom: 1.5rem;
     color: #4a4a4a;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
+.project-section ul {
+    padding-left: 1.5rem;
+}
 
 .project-image-container {
     margin: 1rem 0;
     border-radius: 0.5rem;
-    height: 200px;
+    height: auto;
+    max-height: 200px;
     overflow-y: auto;
     border: 0px solid #eaeaea;
+    width: 100%;
 }
 
 /*Photo Row*/
 .photo-row {
     display: flex;
-    justify-content: center
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
 }
 
 /* Collapsible Components */
@@ -272,10 +292,11 @@ body {
 
 /* Prompt Library Section */
 .prompt-library {
-    padding: 4rem 2rem;
+    padding: 3rem 1rem;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 800px;
+    min-height: 600px;
+    width: 100%;
 }
 
 #prompt-library-root {
@@ -283,9 +304,12 @@ body {
     border: 1px solid #eee;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    height: 800px;
+    height: auto;
+    min-height: 600px;
+    max-height: 800px;
     overflow-y: auto;
     position: relative;
+    width: 100%;
 }
 
 /* Prompt Library Filters */
@@ -297,6 +321,7 @@ body {
     margin-bottom: 1rem;
     z-index: 10;
     border-bottom: 1px solid #eee;
+    width: 100%;
 }
 
 .prompt-search {
@@ -310,19 +335,22 @@ body {
 
 .category-filters {
     display: flex;
-    gap: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
     padding: 0.5rem 0;
+    width: 100%;
+    overflow-x: auto;
 }
 
 .category-btn {
-    padding: 0.5rem 1.5rem;
+    padding: 0.5rem 1rem;
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     background: white;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
 }
 
 .category-btn.active {
@@ -335,8 +363,9 @@ body {
 .prompts-grid {
     padding: 1rem;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    width: 100%;
 }
 
 /* Prompt Card Styles */
@@ -346,11 +375,12 @@ body {
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: all 0.3s ease;
+    width: 100%;
 }
 
 .prompt-card.expanded {
     grid-column: 1 / -1;
-    max-width: 2000px;
+    max-width: 100%;
     margin: 0 auto;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
@@ -360,10 +390,11 @@ body {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .prompt-card-header h3 {
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 4vw, 1.2rem);
     color: var(--primary-color);
 }
 
@@ -382,26 +413,28 @@ body {
 /* Prompt Card Content */
 .prompt-short-description {
     color: var(--text-color);
-    margin-bottom: .5rem;
-    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
 }
 
 .prompt-card-expandable {
     height: 0;
     overflow: hidden;
     transition: height 0.3s ease;
+    width: 100%;
 }
 
 .prompt-section {
     margin: 1rem 0;
     padding-top: 1rem;
     border-top: 1px solid #eee;
+    width: 100%;
 }
 
 .prompt-section h4 {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 3vw, 1.1rem);
 }
 
 .prompt-template {
@@ -410,14 +443,17 @@ body {
     border-radius: var(--border-radius);
     font-family: monospace;
     white-space: pre-wrap;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 3vw, 0.9rem);
     line-height: 1.5;
+    overflow-x: auto;
+    width: 100%;
 }
 
 .prompt-examples,
 .prompt-tips {
     list-style: none;
     padding: 0;
+    width: 100%;
 }
 
 .prompt-examples li,
@@ -425,7 +461,7 @@ body {
     margin-bottom: 0.25rem;
     padding-left: 1.5rem;
     position: relative;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
 }
 
 .prompt-examples li::before,
@@ -441,7 +477,8 @@ body {
     display: flex;
     gap: 0.25rem;
     flex-wrap: wrap;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
+    width: 100%;
 }
 
 .tag {
@@ -450,6 +487,7 @@ body {
     border-radius: 1rem;
     font-size: 0.8rem;
     color: var(--text-color);
+    margin-bottom: 0.25rem;
 }
 
 /* Modal Styles */
@@ -462,17 +500,19 @@ body {
     height: 100%;
     background: rgba(0,0,0,0.5);
     z-index: 1100;
+    padding: 1rem;
+    overflow-y: auto;
 }
 
 .modal-content {
     background: white;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius);
+    width: 100%;
     max-width: 600px;
-    margin: 4rem auto;
+    margin: 3rem auto;
     position: relative;
 }
-
 
 .close-modal {
     position: absolute;
@@ -484,13 +524,15 @@ body {
 
 /* Form Styles */
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
+    width: 100%;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 #prompt-examples {
@@ -511,10 +553,11 @@ body {
     border: 1px solid #ddd;
     border-radius: var(--border-radius);
     font-family: inherit;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .form-group textarea {
-    min-height: 150px;
+    min-height: 120px;
     resize: vertical;
 }
 
@@ -523,16 +566,21 @@ body {
     background: var(--secondary-color);
     color: white;
     border: none;
-    padding: 0.8rem 2rem;
+    padding: 0.8rem 1.5rem;
     border-radius: var(--border-radius);
     cursor: pointer;
     font-weight: 500;
+    font-size: clamp(0.9rem, 3vw, 1rem);
     letter-spacing: 0.03em;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(107, 163, 178, 0.25);
     position: relative;
     overflow: hidden;
     z-index: 1;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
 }
 
 .submit-btn::before {
@@ -557,58 +605,69 @@ body {
 }
 /* Community Section */
 .community-section {
-    padding: 4rem 2rem;
+    padding: 3rem 1rem;
     text-align: center;
+    width: 100%;
 }
 
 .community-grid {
     max-width: 800px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 /* About Section */
 .about-section {
-    padding: 4rem 2rem;
+    padding: 3rem 1rem;
     background: #f8f8f8;
     margin-top: 2rem;
+    width: 100%;
 }
 
 .about-section h2 {
     text-align: center;
     margin-bottom: 2rem;
     color: var(--primary-color);
+    font-size: clamp(1.5rem, 5vw, 2rem);
 }
 
 .about-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
     max-width: 1100px;
+    width: 100%;
     margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .about-text p {
     margin-bottom: 1.5rem;
     line-height: 1.8;
     color: #555;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .about-values {
     background: white;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    width: 100%;
 }
 
 .about-values h3 {
     margin-bottom: 1.5rem;
     color: var(--primary-color);
     text-align: center;
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
 .values-list {
     list-style: none;
     padding: 0;
+    width: 100%;
 }
 
 .values-list li {
@@ -616,6 +675,7 @@ body {
     padding-left: 1.5rem;
     position: relative;
     line-height: 1.6;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .values-list li::before {
@@ -625,29 +685,33 @@ body {
     color: var(--secondary-color);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
     .about-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
     }
 }
 
 .community-card {
     background: white;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     text-align: center;
-    margin: 2rem auto;
+    margin: 1rem auto;
+    width: 100%;
+    max-width: 500px;
 }
 
 .community-card h3 {
     margin-bottom: 1rem;
     color: var(--primary-color);
+    font-size: clamp(1.2rem, 4vw, 1.5rem);
 }
 
 .community-card p {
     margin-bottom: 1.5rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 .community-card .submit-btn {
@@ -658,19 +722,21 @@ body {
 /* Feature Grid */
 .feature-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2.5rem;
-    margin-top: 2.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
 }
 
 .feature-item {
     background: var(--card-color);
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     transition: var(--transition);
     border-top: 3px solid var(--secondary-color);
     position: relative;
+    width: 100%;
 }
 
 .feature-item:hover {
@@ -680,15 +746,15 @@ body {
 
 .feature-item h3 {
     color: var(--primary-color);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1rem;
     font-weight: 600;
-    font-size: 1.3rem;
+    font-size: clamp(1.1rem, 4vw, 1.3rem);
 }
 
 .feature-item p {
     color: var(--light-text);
     line-height: 1.7;
-    font-size: 0.95rem;
+    font-size: clamp(0.85rem, 3vw, 0.95rem);
 }
 
 /* Expanded Prompt Card Media */
@@ -1255,8 +1321,8 @@ body {
 footer {
     background: var(--primary-color) !important;
     color: white !important;
-    padding: 5rem 2rem 2rem !important;
-    margin-top: 6rem !important;
+    padding: 3rem 1rem 1.5rem !important;
+    margin-top: 4rem !important;
     display: block !important;
     width: 100% !important;
     position: relative !important;
@@ -1277,15 +1343,17 @@ footer::before {
     margin: 0 auto !important;
     display: flex !important;
     justify-content: center !important;
-    gap: 4rem !important;
+    gap: 2rem !important;
     flex-wrap: wrap !important;
+    width: 100% !important;
 }
 
 .footer-section {
     flex: 1 !important;
-    min-width: 200px !important;
-    max-width: 300px !important;
+    min-width: 150px !important;
+    max-width: 250px !important;
     text-align: center !important;
+    margin-bottom: 1.5rem !important;
 }
 
 .footer-section ul {
@@ -1294,14 +1362,14 @@ footer::before {
 }
 
 .footer-section h3 {
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 1rem !important;
     font-weight: 600 !important;
-    font-size: 1.2rem !important;
+    font-size: clamp(1rem, 4vw, 1.2rem) !important;
     letter-spacing: 0.05em !important;
 }
 
 .footer-section li {
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .footer-section a {
@@ -1311,6 +1379,7 @@ footer::before {
     transition: var(--transition);
     position: relative !important;
     padding-left: 0 !important;
+    font-size: clamp(0.85rem, 3vw, 0.95rem) !important;
 }
 
 .footer-section a:hover {
@@ -1333,10 +1402,11 @@ footer::before {
 
 .footer-bottom {
     text-align: center !important;
-    margin-top: 3rem !important;
-    padding-top: 2rem !important;
+    margin-top: 2rem !important;
+    padding-top: 1.5rem !important;
     border-top: 1px solid rgba(255,255,255,0.1) !important;
     width: 100% !important;
+    font-size: clamp(0.8rem, 3vw, 0.9rem) !important;
 }
 
 /* Scrollbar Styles */
@@ -1361,18 +1431,19 @@ footer::before {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .content-wrapper {
-        padding: 0 2rem;
+        padding: 0 1.5rem;
     }
 }
 
 @media (max-width: 992px) {
     .nav-content {
         flex-direction: column;
-        gap: 1rem;
+        gap: 0.75rem;
+        padding: 0.5rem;
     }
     
     .hero-section {
-        padding-top: 10rem;
+        padding-top: 8rem;
     }
     
     .title-logo {
@@ -1380,11 +1451,24 @@ footer::before {
     }
     
     .hero-logo {
-        max-width: 300px !important;
+        max-width: 250px !important;
     }
     
     .footer-content {
-        gap: 2rem !important;
+        gap: 1.5rem !important;
+    }
+    
+    .prompt-card.expanded .prompt-content-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .prompt-card.expanded .prompt-card-content {
+        flex-direction: column;
+    }
+
+    .prompt-video {
+        max-height: 450px;
     }
 }
 
@@ -1396,20 +1480,26 @@ footer::before {
     }
 
     .logo-container {
-        width: 150px;
-        height: 150px;
-        margin: 2rem 0;
+        width: 120px;
+        height: 120px;
+        margin: 1.5rem 0;
     }
 
     .video-container {
         width: 100%;
-        max-width: 350px;
+        max-width: 100%;
     }
     
     .nav-links {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem;
+        gap: 0.75rem;
+        width: 100%;
+    }
+    
+    .nav-links a {
+        font-size: 0.9rem;
+        padding: 0.25rem 0;
     }
     
     .feature-grid {
@@ -1421,46 +1511,25 @@ footer::before {
     }
     
     .hero-section {
-        padding: 8rem 1rem 3rem;
+        padding: 7rem 1rem 2.5rem;
     }
-}
-
-@media (max-width: 1024px) {
-    .prompt-card.expanded .prompt-content-main {
-        flex: 1;
-        min-width: 0;
-    }
-
-    .prompt-card.expanded .prompt-card-content {
-        flex-direction: column;
-    }
-
-    .prompt-video {
-        max-height: 500px;
-    }
-}
-
-@media (max-width: 768px) {
+    
     .prompt-library {
         padding: 2rem 1rem;
     }
     
     #prompt-library-root {
-        height: 600px;
+        min-height: 500px;
     }
     
     .prompts-grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
     }
 
     .videos-row {
         flex-direction: column;
         align-items: center;
-    }
-
-    .video-container {
-        width: 100%;
-        max-width: 400px;
     }
 
     .prompt-card {
@@ -1472,13 +1541,19 @@ footer::before {
     }
 
     .prompt-card.expanded {
-        margin: 0 1rem;
+        margin: 0;
     }
 
     .category-filters {
         justify-content: flex-start;
         overflow-x: auto;
         padding-bottom: 0.5rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .category-filters::-webkit-scrollbar {
+        display: none;
     }
 
     .category-btn {
@@ -1487,12 +1562,55 @@ footer::before {
 
     .prompt-media-top,
     .prompt-media-side {
-        max-height: 400px;
+        max-height: 300px;
     }
     
     .prompt-media-top .prompt-image,
     .prompt-video {
-        max-height: 400px;
+        max-height: 300px;
+    }
+    
+    .guide-article {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-logo {
+        max-width: 95%;
+    }
+    
+    .hero-logo {
+        max-width: 180px !important;
+    }
+    
+    .hero-section {
+        padding: 6rem 0.75rem 2rem;
+    }
+    
+    .project-section {
+        padding: 1.25rem;
+    }
+    
+    .feature-item {
+        padding: 1.25rem;
+    }
+    
+    .prompt-library {
+        padding: 1.5rem 0.75rem;
+    }
+    
+    .prompt-search {
+        padding: 0.5rem;
+    }
+    
+    .category-btn {
+        padding: 0.35rem 0.75rem;
+        font-size: 0.8rem;
+    }
+    
+    .footer-section {
+        min-width: 140px !important;
     }
 }
 
