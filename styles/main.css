@@ -142,7 +142,7 @@ body {
 }
 
 .hero-section {
-    padding: 9rem 1rem 3rem;
+    padding: 10rem 1rem 3rem;
     text-align: center;
     background: linear-gradient(to bottom, var(--background-color), white);
     position: relative;
@@ -151,7 +151,7 @@ body {
 
 @media (min-width: 768px) {
     .hero-section {
-        padding: 10rem 1rem 4rem;
+        padding: 11rem 1rem 4rem;
     }
     
     .hero-logo {
@@ -435,11 +435,6 @@ body {
 @media (max-width: 767px) {
     .prompt-card {
         padding: 0.75rem;
-        max-height: 180px;
-        overflow: hidden;
-    }
-    
-    .prompt-card.expanded {
         max-height: none;
     }
 }
@@ -1111,13 +1106,19 @@ body {
     display: grid;
     grid-template-columns: 3fr 1fr;
     gap: 3rem;
-    padding: 2rem 0 4rem;
+    padding: 10rem 0 4rem;
 }
 
 .guide-header {
     grid-column: 1 / -1;
     text-align: center;
     margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+    .guide-article {
+        padding: 11rem 0 4rem;
+    }
 }
 
 .guide-header h1 {
@@ -1712,7 +1713,7 @@ footer::before {
     }
     
     .guide-article {
-        padding: 0.75rem;
+        padding: 9rem 0.75rem 2rem;
     }
     
     /* Reduce all headings */
@@ -1748,7 +1749,7 @@ footer::before {
     }
     
     .hero-section {
-        padding: 8rem 0.5rem 1rem;
+        padding: 9rem 0.5rem 1rem;
     }
     
     .hero-content h1 {
@@ -1804,14 +1805,14 @@ footer::before {
     }
     
     .prompts-grid {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        gap: 0.4rem;
-        padding: 0.4rem;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.6rem;
+        padding: 0.5rem;
     }
     
     .prompt-card {
-        padding: 0.5rem;
-        max-height: 150px;
+        padding: 0.75rem;
+        max-height: none;
     }
     
     .prompt-card-header h3 {
@@ -1824,41 +1825,41 @@ footer::before {
     }
     
     .guides-grid {
-        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-        gap: 0.5rem;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 0.75rem;
     }
     
     .guide-card {
-        max-height: 220px;
+        max-height: none;
     }
     
     .guide-image {
-        height: 80px;
+        height: 100px;
     }
     
     .guide-content {
-        padding: 0.5rem;
+        padding: 0.75rem;
     }
     
     .guide-content h2 {
-        font-size: 0.8rem !important;
-        margin-bottom: 0.2rem;
+        font-size: 0.9rem !important;
+        margin-bottom: 0.3rem;
     }
     
     .guide-meta {
-        margin-bottom: 0.3rem;
-        font-size: 0.65rem !important;
+        margin-bottom: 0.5rem;
+        font-size: 0.7rem !important;
     }
     
     .guide-excerpt {
-        font-size: 0.7rem !important;
-        margin-bottom: 0.5rem;
-        max-height: 40px;
+        font-size: 0.75rem !important;
+        margin-bottom: 0.75rem;
+        max-height: none;
     }
     
     .read-more-btn {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.7rem !important;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.75rem !important;
     }
     
     .footer-section {
