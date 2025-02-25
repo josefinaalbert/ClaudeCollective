@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Gallery | Claude Collective</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/gallery.css">
+</head>
+<body>
+    <div class="page-wrapper">
+    <nav class="main-nav">
+        <div class="nav-content">
+            <a href="index.html" class="logo">Claude Collective</a>
+            <ul class="nav-links">
+                <li><a href="index.html#prompts">Prompt Library</a></li>
+                <li><a href="guides.html">Guides</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="index.html#community">Community</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="https://tiktok.com/@Claudecollective" target="_blank">TikTok</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper">
+        <header class="hero-section">
+            <div class="hero-content">
+                <div class="hero-title">
+                    <h1>Visual Creations Gallery</h1>
+                </div>
+                <p>Explore beautiful visualizations, designs, and code-generated art created with Claude</p>
+                <div class="hero-actions">
+                    <a href="#gallery-grid" class="hero-btn primary-btn">Explore Gallery</a>
+                    <a href="claude-features.html#visual-artifacts" class="hero-btn secondary-btn">Learn How</a>
+                </div>
+            </div>
+        </header>
+    
+        <main class="gallery-container">
+            <div class="gallery-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="react">React Components</button>
+                <button class="filter-btn" data-filter="svg">SVG Graphics</button>
+                <button class="filter-btn" data-filter="ui">UI Designs</button>
+                <button class="filter-btn" data-filter="visualization">Data Visualizations</button>
+            </div>
+
+            <div id="gallery-grid" class="gallery-grid">
+                <!-- Gallery items will be added here with JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html#prompts">Prompt Library</a></li>
+                    <li><a href="guides.html">Guides</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#community">Community</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://tiktok.com/@Claudecollective">TikTok</a></li>
+                    <li><a href="mailto:contact@claudecollective.com">Email</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Claude Collective. All rights reserved.</p>
+        </div>
+    </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script type="module" src="js/gallery.js"></script>
+</body>
+</html>

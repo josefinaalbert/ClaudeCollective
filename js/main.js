@@ -170,7 +170,9 @@ function createPromptCard(prompt) {
                         
                         <div class="prompt-section">
                             <h4>Prompt Template</h4>
-                            <p class="prompt-template">${prompt.content}</p>
+                            <div class="prompt-template formatted-content">
+                                ${parseMarkdown(prompt.content)}
+                            </div>
                         </div>
                         
                         ${prompt.examples ? `
