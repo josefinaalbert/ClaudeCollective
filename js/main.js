@@ -171,6 +171,11 @@ function createPromptCard(prompt) {
                         <div class="prompt-section">
                             <h4>Prompt Template</h4>
                             <div class="prompt-template formatted-content">
+                                <button class="copy-btn" title="Copy to clipboard" data-prompt="${encodeURIComponent(prompt.content)}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                                    </svg>
+                                </button>
                                 ${parseMarkdown(prompt.content)}
                             </div>
                         </div>
@@ -239,6 +244,33 @@ function renderPrompts(promptsToRender) {
 }
 
 function handleCardExpansion(e) {
+    // Handle copy button click
+    if (e.target.closest('.copy-btn')) {
+        e.stopPropagation(); // Prevent card expansion when clicking copy button
+        const copyBtn = e.target.closest('.copy-btn');
+        const promptContent = decodeURIComponent(copyBtn.dataset.prompt);
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(promptContent).then(() => {
+            // Visual feedback
+            copyBtn.classList.add('copied');
+            const originalSVG = copyBtn.innerHTML;
+            copyBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+            </svg>`;
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                copyBtn.classList.remove('copied');
+                copyBtn.innerHTML = originalSVG;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
+        });
+        
+        return;
+    }
+
     const card = e.target.closest('.prompt-card');
     if (!card) return;
 
