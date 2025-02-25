@@ -3,7 +3,6 @@ import supabase from './supabaseClient.js';
 
 // DOM Elements
 const galleryGrid = document.getElementById('gallery-grid');
-const filterButtons = document.querySelectorAll('.filter-btn');
 
 // Sample gallery items - replace with your actual data from Supabase
 const galleryItems = [
@@ -114,36 +113,11 @@ function renderGalleryItems(items) {
     galleryGrid.innerHTML = items.map(item => createGalleryCard(item)).join('');
 }
 
-// Filter gallery items
-function filterGalleryItems(filterType) {
-    const galleryCards = document.querySelectorAll('.gallery-card');
-    
-    galleryCards.forEach(card => {
-        if (filterType === 'all' || card.dataset.type === filterType) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-
 // Initialize gallery
 async function initializeGallery() {
     // Fetch and render gallery items
     const items = await fetchGalleryItems();
     renderGalleryItems(items);
-    
-    // Set up filter buttons
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Update active state
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            
-            // Filter items
-            filterGalleryItems(button.dataset.filter);
-        });
-    });
 }
 
 // Initialize when DOM is loaded
